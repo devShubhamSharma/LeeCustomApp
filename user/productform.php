@@ -41,7 +41,7 @@
       <label for="description">Project Description</label>
       <textarea class="form-control" id="description" name="description" rows="1"></textarea>
     </div>
-    <a href="">Click Here for the Catelent Custom Online Digital Catelog</a>
+    <a href="#">Click Here for the Catelent Custom Online Digital Catelog</a>
     <div class="form-group">
       <input type="text" class="form-control" id="productnumber" name="prodduct_number" placeholder="Enter the exact product number and product description here or keyword ex. Tote Bag">
     </div>
