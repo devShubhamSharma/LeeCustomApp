@@ -1,32 +1,57 @@
 <?php
 include("user.php");
 $ob = new User();
-
-print_r($_POST);
-print_r($_FILES);
 extract($_POST);
+if ($action == 'insert') {
+    $order_id="1001";
+    $image_err = false;
+    function fileupload($filename)
+    {
+        if (isset($_FILES[$filename]['name'])) {
+            $file = $_FILES[$filename]['name'];
+            $tmp_name = $_FILES[$filename]['tmp_name'];
+            $ext = pathinfo($file);
+            $valid_ext = array('jpg','jpeg','png');
+            if (in_array($ext['extension'], $valid_ext)) {
+                $new_file_name = rand().".".$ext['extension'];
+                $path = "../images/".$new_file_name;
+                if (move_uploaded_file($tmp_name, $path)) {
+                    echo "Upload Successfully";
+                    $GLOBALS['image_err'] = true;
+                }
+                else{
+                    $GLOBALS['image_err'] = false;
+                }
+            }
+            else{
+                $GLOBALS['image_err'] = false;
+            }
+        }
+    }
+   
+    $filename = array("logofile", "samplefile");
+    $key = array_keys($_FILES);
+    for($i = 0; $i< count($filename); $i++)
+    {
+        if($filename[$i] == $key[$i])
+        {
+            fileupload($filename[$i]);
+        }
+        print_r($image_err);
+    }
+
+   
 
 
-
-if ($_POST['action'] == 'insert') {
-    $order_id="#1001";
-    $description=$_POST['description'];
-    $product_info=$_POST['prodduct_number'];
-    $quantity=$_POST['qauntity'];
-    $selected_date=$_POST['date'];
-    $logos_name=implode(" ",$_POST['Logos']);
-    $department=$_POST['Department'];
-    $site=$_POST['site'];
-    $logo_file='dommy';
-    $project_owner=$_POST['projectowner'];
-    $phone=$_POST['phone'];
-    $email=$_POST['exampleInputEmail'];
-    $sample_file="sample";
-    $terms=$_POST['term'];
-    echo $_POST['action'];
-    
-    $flag=$ob->insertdata($order_id, $description,$product_info,$quantity,$selected_date,$logos_name,$logo_file,$department,$site,$project_owner,$sample_file,$phone,$email,$terms);
-    echo $flag;
+    // if($term == 'on')
+    // {
+    //     $term = true;
+    // }
+    // else{
+    //     $term = false;
+    // }
+    // $flag=$ob->insertdata($order_id, $description,$product_number,$qauntity,$date,$logos,$logo_file,$department,$site,$projectowner,$sample_file,$phone,$InputEmail,$term);
+    // echo $flag;
 }
 
 
