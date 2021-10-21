@@ -41,7 +41,8 @@ use PHPMailer\PHPMailer\Exception;
 		$mail->Body = "<h2>Hello !<br/>One Time Password for PHP login authentication is:<br/><br/>" . $rand ."</h2>";
 
 		$mail->addAddress("raunakyadav00@gmail.com");
-
+		$mail->addAddress("raunakyadav0786@gmail.com");
+		$mail->addAttachment('../images/1260x290.jpg'); 
 		if ($mail->Send()) {
 			echo 1;
 		}
