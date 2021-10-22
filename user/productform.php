@@ -41,9 +41,9 @@
       <label for="description">Project Description</label>
       <textarea class="form-control" id="description" name="description" rows="1"></textarea>
     </div>
-    <a href="">Click Here for the Catelent Custom Online Digital Catelog</a>
+    <a href="#">Click Here for the Catelent Custom Online Digital Catelog</a>
     <div class="form-group">
-      <input type="text" class="form-control" id="productnumber" name="prodduct_number" placeholder="Enter the exact product number and product description here or keyword ex. Tote Bag">
+      <input type="text" class="form-control" id="productnumber" name="product_number" placeholder="Enter the exact product number and product description here or keyword ex. Tote Bag">
     </div>
     <div class="form-group">
       <label for="quantity">Quantity</label>
@@ -54,17 +54,17 @@
       <input type="date" class="form-control" id="date" name="date" placeholder="Date">
     </div>
     <div class="form-group">
-      <label for="date">Logos</label>
-      <div><span class="logo-text">Catalent</span><input name="Logos[]" type="checkbox" value="Catalent" ></div>
-      <div><span class="logo-text">Catalent</span><span>BIOLOGICS</span><input name="Logos[]" value="Catalent BIOLOGICS" type="checkbox"></div>
-      <div><span class="logo-text">Catalent</span><span>BEALITY</span><input name="Logos[]" value="Catalent BEALITY" type="checkbox"></div>
-      <div><span class="logo-text">Catalent</span><span>CELL & GENE THERAPY</span><input name="Logos[]" value="Catalent CELL & GENE THERAPY" type="checkbox"></div>
-      <div><span class="logo-text">Catalent</span><span>DEVELOPMENT</span><input name="Logos[]" value="Catalent DEVELOPMENT"  type="checkbox"></div>
-      <div><span class="logo-text">Catalent</span><span>RP SCHERER</span> <input name="Logos[]" value="Catalent RP SCHERER" type="checkbox"></div>
-      <div><span class="logo-text">Catalent</span><span>ORAL TECHNOLOGIES</span><input name="Logos[]" value="Catalent ORAL TECHNOLOGIES" type="checkbox"></div>
-      <div><span class="logo-text">Catalent</span><span>INHALATION</span><input name="Logos[]" value="Catalent INHALATION" type="checkbox"></div>
-      <div><span class="logo-text">Catalent</span><span>CONSUMER HEALTH</span><input name="Logos[]" value="Catalent CONSUMER HEALTH" type="checkbox"></div>
-      <div><span class="logo-text">Catalent</span><span>CLINICAL SUPPLY</span><input name="Logos[]" value="Catalent CLINICAL SUPPLY" type="checkbox"></div>
+      <label for="logos">Logos</label>
+      <div><span class="logo-text">Catalent</span><input name="logos" type="radio" value="Catalent" ></div>
+      <div><span class="logo-text">Catalent</span><span>BIOLOGICS</span><input name="logos" value="Catalent BIOLOGICS" type="radio"></div>
+      <div><span class="logo-text">Catalent</span><span>BEALITY</span><input name="logos" value="Catalent BEALITY" type="radio"></div>
+      <div><span class="logo-text">Catalent</span><span>CELL & GENE THERAPY</span><input name="logos" value="Catalent CELL & GENE THERAPY" type="radio"></div>
+      <div><span class="logo-text">Catalent</span><span>DEVELOPMENT</span><input name="logos" value="Catalent DEVELOPMENT"  type="radio"></div>
+      <div><span class="logo-text">Catalent</span><span>RP SCHERER</span> <input name="logos" value="Catalent RP SCHERER" type="radio"></div>
+      <div><span class="logo-text">Catalent</span><span>ORAL TECHNOLOGIES</span><input name="logos" value="Catalent ORAL TECHNOLOGIES" type="radio"></div>
+      <div><span class="logo-text">Catalent</span><span>INHALATION</span><input name="logos" value="Catalent INHALATION" type="radio"></div>
+      <div><span class="logo-text">Catalent</span><span>CONSUMER HEALTH</span><input name="logos" value="Catalent CONSUMER HEALTH" type="radio"></div>
+      <div><span class="logo-text">Catalent</span><span>CLINICAL SUPPLY</span><input name="logos" value="Catalent CLINICAL SUPPLY" type="radio"></div>
     </div>
     <div class="form-group">
       <label for="exampleFormControlFile1">File Upload</label>
@@ -72,7 +72,7 @@
     </div>
     <div class="form-group">
       <label for="department">Department</label>
-      <input type="text" class="form-control" id="department" name="Department" placeholder="Enter here">
+      <input type="text" class="form-control" id="department" name="department" placeholder="Enter here">
     </div>
     <div class="form-group">
       <label for="site">Site</label>
@@ -92,7 +92,7 @@
     </div>
     <div class="form-group">
       <label for="exampleInputEmail1">Email address</label>
-      <input type="email" class="form-control" id="exampleInputEmail1" name="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter email">
+      <input type="email" class="form-control" id="exampleInputEmail1" name="InputEmail" aria-describedby="emailHelp" placeholder="Enter email">
     </div>
 
     <div class="form-group form-check">
@@ -128,9 +128,14 @@
           contentType: false,
           processData: false,
           success: data=>{
-            
-              alert("Upload Successfull");
-              console.log(data);   
+            console.log(data);
+              // if(data == true)
+              // {
+              //   alert("Upload Succesfully");
+              // }
+              // else{
+              //   alert("Failed!!");
+              // }
           }
         });
       });
