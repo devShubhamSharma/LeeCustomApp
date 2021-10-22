@@ -54,7 +54,7 @@
       <input type="date" class="form-control" id="date" name="date" placeholder="Date">
     </div>
     <div class="form-group">
-      <label for="logos">Logos</label>
+      <label for="logos">Logos<br>Click on the logo to select</label>
       <div><span class="logo-text">Catalent</span><input name="logos" type="radio" value="Catalent" ></div>
       <div><span class="logo-text">Catalent</span><span>BIOLOGICS</span><input name="logos" value="Catalent BIOLOGICS" type="radio"></div>
       <div><span class="logo-text">Catalent</span><span>BEALITY</span><input name="logos" value="Catalent BEALITY" type="radio"></div>
@@ -76,7 +76,11 @@
     </div>
     <div class="form-group">
       <label for="site">Site</label>
-      <input type="text" class="form-control" id="site" name="site" placeholder="Enter here">
+      <!-- <input type="text" class="form-control" id="site" name="site" placeholder="Enter here"> -->
+      <select class="form-control" id="site" name="site" placeholder="Enter here">
+        <option>--Select Site--</option>
+        <option value="Anagni, Italy ,Località Fontana del Ceraso snc – S.P. 12 CASILINA N°41 , Anagni FR Italy 03012  Europe +39 0775 7621">Anagni, Italy ,Località Fontana del Ceraso snc – S.P. 12 CASILINA N°41 , Anagni FR Italy 03012  Europe +39 0775 7621</option>
+      </select>
     </div>
     <div class="form-group">
       <label for="projectowner">Project Owner</label>
@@ -110,6 +114,30 @@
     </div>
     <button type="submit" id="save" class="btn btn-primary">Submit</button>
   </form>
+
+   <!-- Trigger the modal with a button -->
+   <button style="display:none;" type="button" class="btn btn-info btn-lg click" data-toggle="modal" data-target="#myModal">Open Modal</button>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog">
+  
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modal Header</h4>
+      </div>
+      <div class="modal-body">
+        <p id="result">Some text in the modal.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+    
+  </div>
+</div>
 </body>
 
 <script>
@@ -129,6 +157,8 @@
           processData: false,
           success: data=>{
             console.log(data);
+            $('#result').html(data);
+            $('.click').click();
               // if(data == true)
               // {
               //   alert("Upload Succesfully");
