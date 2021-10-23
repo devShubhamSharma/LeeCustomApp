@@ -72,8 +72,8 @@ class User
 		$mail->addAddress($email);
 
 		if ($mail->Send()) {
-			echo 1;
-            echo $rand;
+			
+            echo "<h3>Your Order is placed successfully<h3> <br> Your order Id is <b>".$rand."<b>";
 		}
 		else{
 			echo 0;

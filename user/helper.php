@@ -65,7 +65,7 @@ if ($action == 'insert') {
      </tr>
     </table>
    ';
-   $term = false;
+   
     if($term == 'on')
     {
         $term = true;
@@ -88,7 +88,7 @@ if ($action == 'insert') {
             {
                 move_uploaded_file($file_tmp1, $location.$file1);
                 move_uploaded_file($file_tmp2, $location.$file2);
-                echo "success";
+                // echo "success";
                 $ob->sendemail($InputEmail,$message,$file_name);
             }
             else
