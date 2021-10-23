@@ -4,7 +4,7 @@ $ob = new User();
 extract($_POST);
 if ($action == 'insert') {
 
-    $order_id=rand(99999,10000);
+    $order_id=rand(99999,10000);//generating random order Id
       
     $location="../images/";
     $uploadflags=array($_FILES['logofile']['error'],$_FILES['samplefile']['error']);
@@ -15,6 +15,7 @@ if ($action == 'insert') {
     $file_tmp2=$_FILES['samplefile']['tmp_name'];
     $file_name=array($file1,$file2);
 
+    //Email msg formate in tabular formate
     $message = '
     <h3 align="center">Order Details</h3>
     <table border="1" width="100%" cellpadding="5" cellspacing="5">
@@ -64,7 +65,7 @@ if ($action == 'insert') {
      </tr>
     </table>
    ';
-    
+   
     if($term == 'on')
     {
         $term = true;
@@ -75,19 +76,19 @@ if ($action == 'insert') {
     $ext1 = pathinfo($file1);
     $ext2 = pathinfo($file2);
     $len=count($_FILES);
-    print_r($_FILES['logofile']['error']);
+    // print_r($_FILES['logofile']['error']);
     $valid_ext = array('jpg','jpeg','png');
-    print_r($uploadflags);
+    // print_r($uploadflags);
     if($uploadflags[0]==0 && $uploadflags[1]==0 ){
-        echo "Bothfile";
+        // Uploading Both files and sending email
        
         if (in_array($ext1['extension'], $valid_ext) && in_array($ext2['extension'], $valid_ext)) {
             $flag=$ob->insertdata($order_id, $description,$product_number,$qauntity,$date,$logos,$file1,$department,$site,$projectowner,$file2,$phone,$InputEmail,$term);
-            if($flag && $term == true)
+            if($flag && $term == true)//If extension is valid and then move file add in db and send mail
             {
                 move_uploaded_file($file_tmp1, $location.$file1);
                 move_uploaded_file($file_tmp2, $location.$file2);
-                echo "success";
+                // echo "success";
                 $ob->sendemail($InputEmail,$message,$file_name);
             }
             else
@@ -102,13 +103,12 @@ if ($action == 'insert') {
         }
 
     }else if($uploadflags[0]==0 && $uploadflags[1]==4 ){
-        echo "logo";
+        // Uploading logo file and sending email
         if (in_array($ext1['extension'], $valid_ext)) {
             $flag=$ob->insertdata($order_id, $description,$product_number,$qauntity,$date,$logos,$file1,$department,$site,$projectowner,$file2,$phone,$InputEmail,$term);
-            if($flag && $term == true)
+            if($flag && $term == true) // if data inserted successfully;
             {
                 move_uploaded_file($file_tmp1, $location.$file1);
-                echo "success";
                 $ob->sendemail($InputEmail,$message,$file_name);
             }
             else
@@ -122,13 +122,12 @@ if ($action == 'insert') {
             
         }
     }elseif($uploadflags[0]==4 && $uploadflags[1]==0){
-        echo "sample";
+        //Uploading single file and sending email
         if (in_array($ext2['extension'], $valid_ext)) {
             $flag=$ob->insertdata($order_id, $description,$product_number,$qauntity,$date,$logos,$file1,$department,$site,$projectowner,$file2,$phone,$InputEmail,$term);
-            if($flag && $term == true)
+            if($flag && $term == true)  // if data inserted successfully;
             {
                 move_uploaded_file($file_tmp2, $location.$file2);
-                echo "success";
                 $ob->sendemail($InputEmail,$message,$file_name);
             }
             else
@@ -147,8 +146,7 @@ if ($action == 'insert') {
         $sample_file="";
         if($term==true){
          $flag=$ob->insertdata($order_id, $description,$product_number,$qauntity,$date,$logos,$logo_file,$department,$site,$projectowner,$sample_file,$phone,$InputEmail,$term); 
-         if($flag){
-             echo "success";
+         if($flag){       // if data inserted successfully;            
              $ob->sendemail($InputEmail,$message,$file_name);
          }else{
              echo "failed";

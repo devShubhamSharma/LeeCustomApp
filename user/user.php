@@ -32,12 +32,10 @@ class User
     }
 
     function sendemail($email,$message,$loc){
-        print_r($loc);
+        //$loc array to check attachment
         $location="../images/";
 		$rand = mt_rand(100000,999999);
-		if (isset($rand)) {
-			$_SESSION['email_otp']=$rand;
-		}
+		
 
 		$mail = new PHPMailer();
 
@@ -55,7 +53,7 @@ class User
 
 		$mail->Password = "Rahul@1998";
 
-		$mail->Subject = "Mail OTP Verification";
+		$mail->Subject = "Order Confirmation";
 
 		$mail->isHTML(true);
 
@@ -74,7 +72,8 @@ class User
 		$mail->addAddress($email);
 
 		if ($mail->Send()) {
-			echo 1;
+			
+            echo "<h3>Your Order is placed successfully<h3> <br> Your order Id is <b>".$rand."<b>";
 		}
 		else{
 			echo 0;
