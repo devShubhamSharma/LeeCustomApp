@@ -35,9 +35,7 @@ class User
     function sendemail($email,$message,$loc,$order_id){
         //$loc array to check attachment
         $location="../images/";
-		$rand = mt_rand(100000,999999);
 		
-
 		$mail = new PHPMailer();
 
 		$mail->isSMTP();

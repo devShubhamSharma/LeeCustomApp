@@ -477,7 +477,7 @@ function convert(str) {
 
   
   $(function(){
-      // Initialize select2
+    // Initialize select2
     $("#site").select2();
     var inputDate = new Date();
     var newdate=inputDate.setDate( inputDate.getDate() + 21);
@@ -495,17 +495,14 @@ function convert(str) {
           data: formData,
           contentType: false,
           processData: false,
+          beforeSend: function(){
+             $("#save").text("Submitting Your request");
+          },
           success: data=>{
             console.log(data);
             $('#result').html(data);
             $('.modal-btn').click();
-              // if(data == true)
-              // {
-              //   alert("Upload Succesfully");
-              // }
-              // else{
-              //   alert("Failed!!");
-              // }
+            $("#save").text("Submit Request");
           }
         });
        
