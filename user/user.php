@@ -31,7 +31,7 @@ class User
         }
     }
 
-    function sendemail($email,$message,$loc){
+    function sendemail($email,$message,$loc,$order_id){
         //$loc array to check attachment
         $location="../images/";
 		$rand = mt_rand(100000,999999);
@@ -73,7 +73,7 @@ class User
 
 		if ($mail->Send()) {
 			
-            echo "<h3>Your Order is placed successfully<h3> <br> Your order Id is <b>".$rand."<b>";
+            echo "<h3>Your Order is placed successfully<h3> <br> Your order Id is <b>".$order_id."<b>";
 		}
 		else{
 			echo 0;

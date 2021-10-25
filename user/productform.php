@@ -395,7 +395,7 @@ flex-flow: unset!important;
             <div class="form-group">
               <div class="form-check">
                 <div style="display: flex; align-items: center;">
-                <input type="checkbox" name="term" class="form-check-input" id="exampleCheck1">
+                <input type="checkbox" name="term" class="form-check-input" id="term">
                 <label class="form-check-label" for="defaultCheck1">
                   By checking this box you have agree below terms of condition
                 </label>
@@ -436,7 +436,7 @@ flex-flow: unset!important;
  </div>
 
    <!-- Trigger the modal with a button -->
-   <button style="display:none;" type="button" class="btn btn-info btn-lg click" data-toggle="modal" data-target="#myModal">Open Modal</button>
+   <button style="display:none;" type="button" class="btn btn-info btn-lg modal-btn" data-toggle="modal" data-target="#myModal">Open Modal</button>
 
 <!-- Modal -->
 <!-- The Modal -->
@@ -487,6 +487,8 @@ function convert(str) {
 
         let formData = new FormData(this);
         formData.append('action','insert');
+        if ($("#term").prop('checked')==true){ 
+        //do something
         $.ajax({
           type: "POST",
           url: "helper.php",
@@ -496,7 +498,7 @@ function convert(str) {
           success: data=>{
             console.log(data);
             $('#result').html(data);
-            $('.click').click();
+            $('.modal-btn').click();
               // if(data == true)
               // {
               //   alert("Upload Succesfully");
@@ -506,6 +508,11 @@ function convert(str) {
               // }
           }
         });
+        }else{
+          $('#result').html("Please accept our terms");
+          $('.modal-btn').click();
+        }
+       
       });
 });
  
