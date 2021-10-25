@@ -6,9 +6,10 @@ use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
 
-require '../include/Exception.php';
-require '../include/PHPMailer.php';
-require '../include/SMTP.php';
+// require '../include/Exception.php';
+// require '../include/PHPMailer.php';
+// require '../include/SMTP.php';
+require_once('../vendor/autoload.php');
 class User 
 {
     public $con;
@@ -31,12 +32,10 @@ class User
         }
     }
 
-    function sendemail($email,$message,$loc){
+    function sendemail($email,$message,$loc,$order_id){
         //$loc array to check attachment
         $location="../images/";
-		$rand = mt_rand(100000,999999);
 		
-
 		$mail = new PHPMailer();
 
 		$mail->isSMTP();
@@ -58,6 +57,7 @@ class User
 		$mail->isHTML(true);
 
 		$mail->setFrom("yadavraunak449@gmail.com");
+        // $mail->setfrom('noreply@cedcommerce.com');
 
        
         for ($i=0; $i < count($loc); $i++) {           
@@ -70,13 +70,14 @@ class User
         
         
 		$mail->addAddress($email);
+        $mail->addcc("akbharti1717@gmail.com");
 
 		if ($mail->Send()) {
 			
-            echo "<h3>Your Order is placed successfully<h3> <br> Your order Id is <b>".$rand."<b>";
+            echo "<h3>Your Order is placed successfully<h3> <br> Your order Id is <b>".$order_id."<b>";
 		}
 		else{
-			echo 0;
+			echo "Mailer Error: " . $mail->ErrorInfo;
 		}
 
 		$mail->smtpClose();

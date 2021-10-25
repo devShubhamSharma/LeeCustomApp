@@ -4,7 +4,7 @@ $ob = new User();
 extract($_POST);
 if ($action == 'insert') {
 
-    $order_id=rand(99999,10000);//generating random order Id
+    $order_id=mt_rand(100000,999999);//generating random order Id
       
     $location="../images/";
     $uploadflags=array($_FILES['logofile']['error'],$_FILES['samplefile']['error']);
@@ -89,11 +89,11 @@ if ($action == 'insert') {
                 move_uploaded_file($file_tmp1, $location.$file1);
                 move_uploaded_file($file_tmp2, $location.$file2);
                 // echo "success";
-                $ob->sendemail($InputEmail,$message,$file_name);
+                $ob->sendemail($InputEmail,$message,$file_name,$order_id);
             }
             else
             {
-                echo "failed";
+                echo "Failed to Insert Record and Send Details";
             }
             
         }
@@ -109,11 +109,11 @@ if ($action == 'insert') {
             if($flag && $term == true) // if data inserted successfully;
             {
                 move_uploaded_file($file_tmp1, $location.$file1);
-                $ob->sendemail($InputEmail,$message,$file_name);
+                $ob->sendemail($InputEmail,$message,$file_name,$order_id);
             }
             else
             {
-                echo "failed";
+                echo "Failed to Insert Record and Send Details";
             }
             
         }
@@ -128,11 +128,11 @@ if ($action == 'insert') {
             if($flag && $term == true)  // if data inserted successfully;
             {
                 move_uploaded_file($file_tmp2, $location.$file2);
-                $ob->sendemail($InputEmail,$message,$file_name);
+                $ob->sendemail($InputEmail,$message,$file_name,$order_id);
             }
             else
             {
-                echo "failed";
+                echo "Failed to Insert Record and Send Details";
             }
             
         }
@@ -141,18 +141,18 @@ if ($action == 'insert') {
             
         }
     }else{
-        echo "insert record";
+    //Send mail and insert record if no file available
         $logo_file="";
         $sample_file="";
         if($term==true){
          $flag=$ob->insertdata($order_id, $description,$product_number,$qauntity,$date,$logos,$logo_file,$department,$site,$projectowner,$sample_file,$phone,$InputEmail,$term); 
          if($flag){       // if data inserted successfully;            
-             $ob->sendemail($InputEmail,$message,$file_name);
+             $ob->sendemail($InputEmail,$message,$file_name,$order_id);
          }else{
-             echo "failed";
+             echo "Failed to Insert Record and Send Details";
          }  
         }else{
-            echo "failed to insert";
+            echo "Failed to Insert Record";
         }
     }
             
