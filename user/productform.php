@@ -439,23 +439,28 @@ flex-flow: unset!important;
    <button style="display:none;" type="button" class="btn btn-info btn-lg click" data-toggle="modal" data-target="#myModal">Open Modal</button>
 
 <!-- Modal -->
-<div class="modal fade" id="myModal" role="dialog">
+<!-- The Modal -->
+<div class="modal" id="myModal">
   <div class="modal-dialog">
-  
-    <!-- Modal content-->
     <div class="modal-content">
+
+      <!-- Modal Header -->
       <div class="modal-header">
+        <h4 class="modal-title">Order Status & Details</h4>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Order Status</h4>
       </div>
+
+      <!-- Modal body -->
       <div class="modal-body">
-        <p id="result">Some text in the modal.</p>
+        <p id="result"></p>
       </div>
+
+      <!-- Modal footer -->
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
       </div>
+
     </div>
-    
   </div>
 </div>
 </body>
@@ -473,8 +478,9 @@ function convert(str) {
   
   $(function(){
     var inputDate = new Date();
-    inputDate.setDate( inputDate.getDate() + 21 );
-    $('#date').attr('min', convert(inputDate));
+    var newdate=inputDate.setDate( inputDate.getDate() + 21);
+    // alert(convert(newdate));
+    $('#date').attr('min', convert(newdate));
 
     $("#Order_record").on("submit", function(e){
         e.preventDefault();
