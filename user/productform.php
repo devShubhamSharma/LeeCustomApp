@@ -395,7 +395,7 @@ flex-flow: unset!important;
             <div class="form-group">
               <div class="form-check">
                 <div style="display: flex; align-items: center;">
-                <input type="checkbox" name="term" class="form-check-input" id="term">
+                <input type="checkbox" name="term" class="form-check-input" id="term" required>
                 <label class="form-check-label" for="defaultCheck1">
                   By checking this box you have agree below terms of condition
                 </label>
@@ -477,6 +477,8 @@ function convert(str) {
 
   
   $(function(){
+      // Initialize select2
+    $("#site").select2();
     var inputDate = new Date();
     var newdate=inputDate.setDate( inputDate.getDate() + 21);
     // alert(convert(newdate));
@@ -487,8 +489,6 @@ function convert(str) {
 
         let formData = new FormData(this);
         formData.append('action','insert');
-        if ($("#term").prop('checked')==true){ 
-        //do something
         $.ajax({
           type: "POST",
           url: "helper.php",
@@ -508,10 +508,6 @@ function convert(str) {
               // }
           }
         });
-        }else{
-          $('#result').html("Please accept our terms");
-          $('.modal-btn').click();
-        }
        
       });
 });
