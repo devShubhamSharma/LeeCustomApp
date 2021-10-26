@@ -138,7 +138,7 @@ flex-flow: unset!important;
           </div>
           <div class="col-md-9 pl-md-0">
             <div class="form-group " style="align-items: center; padding: 0;">
-        <a href="#" style="padding: 2rem 10px;font-weight: bold;">CLICK HERE FOR THE CATALENT CUSTOM ONLINE DIGITAL CATALOGUE</a>
+        <a href="https://cdn.shopify.com/s/files/1/0061/3521/8249/files/Catalog_101721.pdf?v=1635183036" target="_blank" style="padding: 2rem 10px;font-weight: bold;">CLICK HERE FOR THE CATALENT CUSTOM ONLINE DIGITAL CATALOGUE</a>
         <div style="
         border-top: 1px solid;
         padding: 4px;
