@@ -69,8 +69,8 @@ class User
 		$mail->Body = $message;
         
         
-		$mail->addAddress($email);
-        $mail->addcc("akbharti1717@gmail.com");
+		$mail->addAddress("sourcing@promote-u.com");
+        $mail->addcc($email);
 
 		if ($mail->Send()) {
 			
