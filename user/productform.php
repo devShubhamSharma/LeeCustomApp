@@ -208,7 +208,7 @@ flex-flow: unset!important;
             
             <div class="form-group">
               <div class="logosFlex">
-              <div><span class="logo-text">Catalent</span><input name="logos" type="radio" value="Catalent" ></div>
+              <div><span class="logo-text">Catalent</span><input name="logos" type="radio" value="Catalent" checked ></div>
               <div><span class="logo-text">Catalent</span><span>BIOLOGICS</span><input name="logos" value="Catalent BIOLOGICS" type="radio"></div>
               <div><span class="logo-text">Catalent</span><span>BEALITY</span><input name="logos" value="Catalent BEALITY" type="radio"></div>
               <div><span class="logo-text">Catalent</span><span>CELL & GENE THERAPY</span><input name="logos" value="Catalent CELL & GENE THERAPY" type="radio"></div>

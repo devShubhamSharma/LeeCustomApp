@@ -77,7 +77,7 @@ if ($action == 'insert') {
     $ext2 = pathinfo($file2);
     $len=count($_FILES);
     // print_r($_FILES['logofile']['error']);
-    $valid_ext = array('jpg','jpeg','png');
+    $valid_ext = array('jpg','jpeg','png','pdf','PNG','JPEG','JPG','PDF');
     // print_r($uploadflags);
     if($uploadflags[0]==0 && $uploadflags[1]==0 ){
         // Uploading Both files and sending email
