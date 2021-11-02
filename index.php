@@ -8,7 +8,7 @@
     <?php include "./cdn/data-cdn.php"; ?>
 </head>
 <body>
-<form>
+<form method="post" action='user/dashboard.php'>
   <div class="form-group">
     <label for="exampleInputEmail1">Enter Your Email</label>
     <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">

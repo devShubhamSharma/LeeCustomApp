@@ -22,10 +22,11 @@ class User
 
     function insertdata($order_id, $description,$product_info,$quantity,$selected_date,$logos_name,$logo_file,$department,$site,$project_owner,$sample_file,$phone,$email,$terms)
     {
-        $q = "INSERT INTO
+        $q1 = "INSERT INTO
          productform (`order_id`, `description`, `product_info`, `quantity`, `selected_date`, `logos_name`, `logo_file`, `department`, `site`, `project_owner`, `sample_file`, `phone`, `email`, `terms`)
         VALUES ('$order_id', '$description','$product_info','$quantity','$selected_date','$logos_name','$logo_file','$department','$site','$project_owner','$sample_file','$phone','$email','$terms')";
-        if ($this->con->query($q)) {
+        $q2="INSERT INTO `statustable`(`order_id`) VALUES ('$order_id')";
+        if ($this->con->query($q1) && $this->con->query($q2)) {
             return true;
         } else {
             return false;
@@ -70,6 +71,7 @@ class User
         
         
 		$mail->addAddress("sourcing@promote-u.com");
+        // $mail->addAddress($email);
         $mail->addcc($email);
 
 		if ($mail->Send()) {

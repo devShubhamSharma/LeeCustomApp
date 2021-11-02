@@ -10,18 +10,27 @@
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
   
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+<style>
+    /* Ensure that the demo table scrolls */
+    /* Ensure that the demo table scrolls */
+    th, td { white-space: nowrap; }
+    div.dataTables_wrapper {
+        width: 80%;
+        margin: 0 auto;
+    }
+</style>
 
 
 </head>
 <body>
     <h1 class="text-center">Order Details</h1>
-    <button id="load">Load Data</button>
-    <table id="table">
+    <div class="table-responsive">
+    <table id="table" class="stripe row-border order-column" style="width:100%">
         <thead>
         <tr>
             <th>Sr no.</th>
-            <th>Email</th>
-            <th>Order Id</th>      
+            <th>Order Id</th>   
+            <th>Email</th>     
             <th>Phone</th>
             <th>Product Description</th>
             <th>Product Info</th>
@@ -40,32 +49,30 @@
      <tbody>
     </tbody>
     </table>
-
+   </div>
+   
     <script>
         $(function(){
             // $("#load").click(function(){
                 $('#table').DataTable( {
+                    scrollY:        "300px",
+                    scrollX:        true,
+                    scrollCollapse: true,
+                    paging:         false,
+                    fixedColumns:   true,
+                    fixedColumns:   {
+                        left: 2
+                    },
                     stateSave: true,
                     bDestroy : true,
                     ajax: {
                         type: "POST",
                         dataType: "json",
+                        data: {action: 'get'},
                         url: "medium.php",
                         dataSrc: "data"
                     }
                 } );
-                $.ajax({
-                type: "POST",
-                url: "medium.php",
-                data: {action: 'get'},
-                dataType: "json",
-                success: data=>{
-                    console.log(data);
-                    // $('#data').append(data);
-                }
-                });   
-            // })
-            // $('#table').DataTable();
         
       });
     </script>
