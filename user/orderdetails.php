@@ -1,3 +1,19 @@
+<?php
+include('user.php');
+$obj=new User();
+session_start();
+if(isset($_POST)){
+if(isset($_POST['email'])){
+    $_SESSION['email']=$_POST['email'];
+}
+}
+// echo $_SESSION['email'];
+$result=$obj->getOrderdetails($_SESSION['email']);
+// print_r(count($result));
+// print_r($result[0]['order_id']);
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,7 +39,7 @@
 
 </head>
 <body>
-    <h1 class="text-center">Order Details</h1>
+    <h1 class="text-center my-5">All Order Details</h1>
     <div class="table-responsive">
     <table id="table" class="stripe row-border order-column" style="width:100%">
         <thead>
@@ -33,20 +49,30 @@
             <th>Email</th>     
             <th>Phone</th>
             <th>Product Description</th>
-            <th>Product Info</th>
             <th>Quantity</th>
-            <th>Estimated Delivery Date</th>
-            <th>Logo Name</th>
-            <th>Show logo file</th>
-            <th>Department</th>
-            <th>Site</th>
-            <th>Project Owner</th>
-            <th>Sample File</th>
             <th>Order Date</th>
-            <th>Status</th>
+            <th>Get Order Status</th>
         </tr>
      </thead>
      <tbody>
+         <?php 
+         for ($i = 0; $i < count($result); $i++) {
+             ?><tr>
+                 <td><?php echo $i+1; ?></td>
+                 <td><?php echo $result[$i]['order_id']; ?></td>
+                 <td><?php echo $result[$i]['email']; ?></td>
+                 <td><?php echo $result[$i]['phone']; ?></td>
+                 <td><?php echo $result[$i]['description']; ?></td>
+                 <td><?php echo $result[$i]['quantity']; ?></td>
+                 <td><?php echo $result[$i]['order_date']; ?></td>
+                 <td><form method="post" action="trackorder.php">
+                     <input type="hidden" name="orderid" value='<?php echo $result[$i]["order_id"]; ?>'>
+                     <button class="btn btn-primary" type="submit">Get Order Status</button>
+                    </form></td>
+             </tr>
+       <?php
+        }
+         ?>
     </tbody>
     </table>
    </div>
@@ -62,16 +88,8 @@
                     fixedColumns:   true,
                     fixedColumns:   {
                         left: 2
-                    },
-                    stateSave: true,
-                    bDestroy : true,
-                    ajax: {
-                        type: "POST",
-                        dataType: "json",
-                        data: {action: 'get'},
-                        url: "medium.php",
-                        dataSrc: "data"
                     }
+                    
                 } );
         
       });
