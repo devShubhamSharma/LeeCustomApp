@@ -84,4 +84,36 @@ class User
 
 		$mail->smtpClose();
     }
+
+    function getOrderdetails($email){
+        $q="SELECT * FROM `productform` WHERE `email`='$email'";
+        $result=$this->con->query($q);
+        if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            $data[]=$row;
+        }
+        return $data;
+    } else {
+        return "0 results";
+    }
+
+    }
+
+    function getOrderStatus($orderId){
+        $q="SELECT *
+        FROM productform
+        LEFT JOIN statustable
+        ON productform.order_id = statustable.order_id
+        WHERE productform.order_id IN ('$orderId') ORDER BY statustable.order_id ";
+        $result=$this->con->query($q);
+        if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            $res[]=$row;
+        }
+            return $res;
+        }else{
+            return $this->con->error;
+        }
+
+    }
 }
