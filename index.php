@@ -14,9 +14,7 @@
     <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
-
-  <a href="./user/productform.php">Click here to custom order</a>
-
+  <a href="http://62e6-103-97-184-106.ngrok.io/App/LeeCustomApp/user/productform.php">Click here to custom order</a>
 </form>
 </body>
 </html>

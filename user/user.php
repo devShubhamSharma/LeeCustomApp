@@ -34,7 +34,7 @@ class User
 
     function sendemail($email,$message,$loc,$order_id){
         //$loc array to check attachment
-        $location="../images/";
+        $location="https://62e6-103-97-184-106.ngrok.io/images";
 		
 		$mail = new PHPMailer();
 
