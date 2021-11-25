@@ -9,6 +9,8 @@ if(isset($_POST['email'])){
 }
 // echo $_SESSION['email'];
 $result=$obj->getOrderdetails($_SESSION['email']);
+// print_r($result);
+// die();
 // print_r(count($result));
 // print_r($result[0]['order_id']);
 
@@ -40,6 +42,7 @@ $result=$obj->getOrderdetails($_SESSION['email']);
 </head>
 <body>
     <h1 class="text-center my-5">All Order Details</h1>
+    <?php  if($result== '0 results'){?> <h4 class="text-center">No Order found using this Email Id</h4> <?php }?>
     <div class="table-responsive">
     <table id="table" class="stripe row-border order-column" style="width:100%">
         <thead>
@@ -56,6 +59,7 @@ $result=$obj->getOrderdetails($_SESSION['email']);
      </thead>
      <tbody>
          <?php 
+         if($result!= '0 results'){
          for ($i = 0; $i < count($result); $i++) {
              ?><tr>
                  <td><?php echo $i+1; ?></td>
@@ -72,6 +76,7 @@ $result=$obj->getOrderdetails($_SESSION['email']);
              </tr>
        <?php
         }
+    }
          ?>
     </tbody>
     </table>

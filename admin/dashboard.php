@@ -9,7 +9,8 @@
   <?php include('../cdn/data-cdn.php'); ?>
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
   
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+ 
 <style>
     /* Ensure that the demo table scrolls */
     /* Ensure that the demo table scrolls */
