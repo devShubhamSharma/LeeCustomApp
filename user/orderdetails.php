@@ -7,13 +7,7 @@ if(isset($_POST['email'])){
     $_SESSION['email']=$_POST['email'];
 }
 }
-// echo $_SESSION['email'];
 $result=$obj->getOrderdetails($_SESSION['email']);
-// print_r($result);
-// die();
-// print_r(count($result));
-// print_r($result[0]['order_id']);
-
 ?>
 
 <!DOCTYPE html>
@@ -71,6 +65,7 @@ $result=$obj->getOrderdetails($_SESSION['email']);
                  <td><?php echo $result[$i]['order_date']; ?></td>
                  <td><form method="post" action="trackorder.php">
                      <input type="hidden" name="orderid" value='<?php echo $result[$i]["order_id"]; ?>'>
+                     <input type="hidden" name="email" value='<?php echo $result[$i]["email"]; ?>'>
                      <button class="btn btn-primary" type="submit">Get Order Status</button>
                     </form></td>
              </tr>

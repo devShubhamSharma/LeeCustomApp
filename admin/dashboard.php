@@ -1,3 +1,9 @@
+<?php
+session_start();
+if (!isset($_SESSION['email'])) {
+  header("Location: logout.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,7 +19,6 @@
  
 <style>
     /* Ensure that the demo table scrolls */
-    /* Ensure that the demo table scrolls */
     th, td { white-space: nowrap; }
     div.dataTables_wrapper {
         width: 80%;
@@ -24,8 +29,14 @@
 
 </head>
 <body>
-    <h1 class="text-center">Order Details</h1>
-    <div class="table-responsive">
+<div class="jumbotron">
+  <h1 class="display-4 text-center">Order Details</h1>
+ <div class="container">
+  <p class="lead">
+    <a class="btn btn-primary btn-lg" href="logout.php" role="button">Logout</a>
+  </p>
+</div>
+  <div class="table-responsive">
     <table id="table" class="stripe row-border order-column" style="width:100%">
         <thead>
         <tr>
@@ -51,12 +62,14 @@
     </tbody>
     </table>
    </div>
+</div>
+
    
     <script>
         $(function(){
             // $("#load").click(function(){
                 $('#table').DataTable( {
-                    scrollY:        "300px",
+                    scrollY:        "500px",
                     scrollX:        true,
                     scrollCollapse: true,
                     paging:         false,

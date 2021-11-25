@@ -3,14 +3,18 @@
 include('admin.php');
 $obj=new Admin();
 session_start();
+if (!isset($_SESSION['email'])) {
+  header("Location: logout.php");
+}
 if(isset($_POST['order_id'])){
     $_SESSION['order_id']=$_POST['order_id'];
 }
-// echo $_SESSION['address'];
+
 $result=$obj->getOrderStatus($_SESSION['order_id']);
-// echo "<pre>";
-// print_r($result);
-$order_processed=$result[0]['order_packed'];
+
+$Order_approved=$result[0]['order_approved'];
+$orderin_production=$result[0]['orderin_production'];
+$order_processed=$result[0]['order_processed'];
 $order_shipped=$result[0]['order_shipped'];
 $out_for_delivey=$result[0]['out_for_delivery'];
 $delivered=$result[0]['delivered'];
@@ -24,130 +28,7 @@ $delivered=$result[0]['delivered'];
     <title>Update Order</title>
     <?php include('../cdn/data-cdn.php'); ?>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
-    body {
-    color: #000;
-    overflow-x: hidden;
-    height: 100%;
-    background-color: #8C9EFF;
-    background-repeat: no-repeat
-}
-
-.card {
-    z-index: 0;
-    background-color: #ECEFF1;
-    padding-bottom: 20px;
-    margin-bottom: 90px;
-    border-radius: 10px
-}
-
-.top {
-    padding-top: 40px;
-    padding-left: 13% !important;
-    padding-right: 13% !important
-}
-
-#progressbar {
-    margin-bottom: 30px;
-    overflow: hidden;
-    color: #455A64;
-    padding-left: 0px;
-    margin-top: 30px
-}
-
-#progressbar li {
-    list-style-type: none;
-    font-size: 13px;
-    width: 25%;
-    float: left;
-    position: relative;
-    font-weight: 400
-}
-
-#progressbar .step0:before {
-    font-family: FontAwesome;
-    content: "\f10c";
-    color: #fff
-}
-
-#progressbar li:before {
-    width: 40px;
-    height: 40px;
-    line-height: 45px;
-    display: block;
-    font-size: 20px;
-    background: #C5CAE9;
-    border-radius: 50%;
-    margin: auto;
-    padding: 0px
-}
-
-#progressbar li:after {
-    content: '';
-    width: 100%;
-    height: 12px;
-    background: #C5CAE9;
-    position: absolute;
-    left: 0;
-    top: 16px;
-    z-index: -1
-}
-
-#progressbar li:last-child:after {
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-    position: absolute;
-    left: -50%
-}
-
-#progressbar li:nth-child(2):after,
-#progressbar li:nth-child(3):after {
-    left: -50%
-}
-
-#progressbar li:first-child:after {
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
-    position: absolute;
-    left: 50%
-}
-
-#progressbar li:last-child:after {
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px
-}
-
-#progressbar li:first-child:after {
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px
-}
-
-#progressbar li.active:before,
-#progressbar li.active:after {
-    background: #651FFF
-}
-
-#progressbar li.active:before {
-    font-family: FontAwesome;
-    content: "\f00c"
-}
-
-.icon {
-    width: 60px;
-    height: 60px;
-    margin-right: 15px
-}
-
-.icon-content {
-    padding-bottom: 20px
-}
-
-@media screen and (max-width: 992px) {
-    .icon-content {
-        width: 50%
-    }
-}
-</style>
+    <link rel="stylesheet" href="../css/orderstatus.css">
 </head>
 <body>
     <div class="container-fluid text-center my-5">    
@@ -162,33 +43,45 @@ $delivered=$result[0]['delivered'];
       <hr>
       <h1>update Order Status</h1>
       <form id="updateorder">
-            <div class="form-check">
-                <input type="hidden" id="order_id" value="<?php echo $_SESSION['order_id']; ?>" >
+      <div class="form-check"> 
+            <input type="hidden" id="order_id" value="<?php echo $_SESSION['order_id']; ?>" >
+            <input type="hidden" id="email" value="<?php echo $result[0]['email']; ?>" >
             <label class="form-check-label" for="check1">
-                <input type="checkbox" class="form-check-input" id="check1" <?php if($order_processed==1){ echo "checked disabled"; } ?> name="Order_Processed" >Order Processed
+                <input type="checkbox" class="form-check-input checkbox" id="check1" <?php if($Order_approved==1){ echo "checked disabled"; } ?> name="Order_approved" >Order Approved
+            </label>
+            </div>
+           <div class="form-check"> 
+            <label class="form-check-label" for="check1">
+                <input type="checkbox" class="form-check-input checkbox" id="check2" <?php if($orderin_production==1){ echo "checked disabled"; } ?> name="orderin_production" >Order In Production
+            </label>
+            </div>
+            <div class="form-check">
+                
+            <label class="form-check-label" for="check1">
+                <input type="checkbox" class="form-check-input checkbox" id="check3" <?php if($order_processed==1){ echo "checked disabled"; } ?> name="Order_Processed" >Order Processed
             </label>
             </div>
             <div class="form-check">
             <label class="form-check-label" for="check2">
-                <input type="checkbox" class="form-check-input" id="check2" <?php if($order_shipped==1){ echo "checked disabled"; } ?> name="Order_Shipped" >Order Shipped
+                <input type="checkbox" class="form-check-input checkbox"  id="check4" <?php if($order_shipped==1){ echo "checked disabled"; } ?> name="Order_Shipped" >Order Shipped
             </label>
             </div>
             <div class="form-check">
             <label class="form-check-label">
-                <input type="checkbox" id="check3" <?php if($out_for_delivey==1){ echo "checked disabled"; } ?> name="out_for_delivey" class="form-check-input">Order En Route
+                <input type="checkbox" id="check5"  <?php if($out_for_delivey==1){ echo "checked disabled"; } ?> name="out_for_delivey" class="form-check-input checkbox">Order En Route
             </label>
             </div>
             <div class="form-check">
             <label class="form-check-label">
-                <input type="checkbox" id="check4" <?php if($delivered==1){ echo "checked disabled"; } ?> name="delivered" class="form-check-input">Order Arrived
+                <input type="checkbox" id="check6"  <?php if($delivered==1){ echo "checked disabled"; } ?> name="delivered" class="form-check-input checkbox">Order Arrived
             </label>
             </div>
-            <button type="submit" id="update" <?php if($delivered==1){ echo "disabled"; } ?> class="btn btn-primary">Update Status</button>
+            <button type="submit" id="update" <?php if($delivered==1){ echo " disabled "; } ?> class="btn btn-primary">Update Status</button>
         </form>
     </div>
     
 
-    <div class="container">
+    <div class="container-fluid">
     <h1>Current Status</h1>
     <div class="card">
         <div class="row d-flex justify-content-between px-3 top">
@@ -204,6 +97,8 @@ $delivered=$result[0]['delivered'];
         <div class="row d-flex justify-content-center">
             <div class="col-12">
                 <ul id="progressbar" class="text-center">
+                    <li class="<?php if($Order_approved==1){ echo "active"; } ?> step0"></li>
+                    <li class="<?php if($orderin_production==1){ echo "active"; } ?> step0"></li>
                     <li class="<?php if($order_processed==1){ echo "active"; } ?> step0"></li>
                     <li class="<?php if($order_shipped==1){ echo "active"; } ?> step0"></li>
                     <li class="<?php if($out_for_delivey==1){ echo "active"; } ?> step0"></li>
@@ -212,6 +107,16 @@ $delivered=$result[0]['delivered'];
             </div>
         </div>
         <div class="row justify-content-between top">
+            <div class="row d-flex icon-content"> 
+                    <div class="d-flex flex-column">
+                        <p class="font-weight-bold">Order<br>Approved</p>
+                    </div>
+            </div>
+            <div class="row d-flex icon-content"> 
+                <div class="d-flex flex-column">
+                    <p class="font-weight-bold">Order<br>In Production</p>
+                </div>
+            </div>
             <div class="row d-flex icon-content"> <img class="icon" src="icons/icons.png">
                 <div class="d-flex flex-column">
                     <p class="font-weight-bold">Order<br>Processed</p>
@@ -240,37 +145,45 @@ $delivered=$result[0]['delivered'];
     $(function(){
     $("#updateorder").on("submit", function(e){
         e.preventDefault();
-
-        // let formData = new FormData(this);
-        // formData.append('action','updateorder');
+        var order_approved;
+        var orderin_production;
         var order_processed;
         var order_shipped;
         var out_for_delivey;
         var delivered;
 
-        var orderId=$('#order_id').val();
 
-       if($("#check1").prop('checked') == true){
-         //do something
-         order_processed=1
+        var orderId=$('#order_id').val();
+        var email=$('#email').val();
+        
+
+        if($("#check1").prop('checked') == true){
+           order_approved=1;
+        } else{
+            order_approved=0;  
+        }
+        if($("#check2").prop('checked') == true){
+            orderin_production=1
+        } else{
+            orderin_production=0;  
+        }
+
+       if($("#check3").prop('checked') == true){
+         order_processed=1;
         } else{
             order_processed=0;  
         }
-        if($("#check2").prop('checked') == true){
-         //do something
+        if($("#check4").prop('checked') == true){
          order_shipped=1;
         }else{
             order_shipped=0;
         }
-        if($("#check3").prop('checked') == true){
-         //do something
+        if($("#check5").prop('checked') == true){
          out_for_delivey=1;
         } else{
             out_for_delivey=0   
         }
-        if($("#check4").prop('checked') == true){
-         //do something
-         console.log("check");
+        if($("#check6").prop('checked') == true){
          delivered=1;
         }else{
             delivered=0
@@ -278,9 +191,15 @@ $delivered=$result[0]['delivered'];
         $.ajax({
           type: "POST",
           url: "medium.php",
-          data: {  order_processed : order_processed,order_shipped :order_shipped, out_for_delivey :out_for_delivey, delivered :delivered, action:'updateorder',orderId:orderId },
+          data: {  order_approved: order_approved,
+          orderin_production: orderin_production,
+          order_processed : order_processed,
+          order_shipped :order_shipped,
+          out_for_delivey :out_for_delivey,
+          delivered :delivered,
+          action:'updateorder',orderId:orderId,email:email },
           beforeSend: function(){
-             $("#update").text("updating the status");
+             $("#update").text("updating the status...");
           },
           success: data=>{
             console.log(data);

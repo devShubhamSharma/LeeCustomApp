@@ -26,7 +26,7 @@
     <form method="post" action='user/trackorder.php'>
       <div class="form-group">
         <label for="exampleInputEmail1">Order Id</label>
-        <input type="number" class="form-control" name="orderid" aria-describedby="emailHelp" placeholder="Enter email" required>
+        <input type="number" class="form-control" name="orderid" aria-describedby="emailHelp" placeholder="Order Id" required>
       </div>
       <div class="form-group">
         <label for="exampleInputEmail1">Enter Your Email</label>
