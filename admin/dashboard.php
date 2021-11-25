@@ -14,8 +14,9 @@ if (!isset($_SESSION['email'])) {
   <title>Product Form</title>
   <?php include('../cdn/data-cdn.php'); ?>
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
-  
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/fixedcolumns/4.0.1/css/fixedColumns.dataTables.min.css">
   <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/fixedcolumns/4.0.1/js/dataTables.fixedColumns.min.js"></script>
  
 <style>
     /* Ensure that the demo table scrolls */
@@ -75,7 +76,8 @@ if (!isset($_SESSION['email'])) {
                     paging:         false,
                     fixedColumns:   true,
                     fixedColumns:   {
-                        left: 2
+                        left: 3,
+                        right: 1
                     },
                     stateSave: true,
                     bDestroy : true,
