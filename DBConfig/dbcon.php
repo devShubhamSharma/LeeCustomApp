@@ -7,10 +7,10 @@
       public $conn;
 
       function  __construct(){
-        $this->hostname="localhost";
-        $this->username="root";
-        $this->password="";
-        $this->dbname="leecustom";
+        $this->hostname="shopify-clients.cluster-c07abb6qygwc.us-east-2.rds.amazonaws.com";
+        $this->username="admin";
+        $this->password="hKx2;aX-e;dFKq]t";
+        $this->dbname="leecustomapp";
       }
 
       function mkconnection(){
