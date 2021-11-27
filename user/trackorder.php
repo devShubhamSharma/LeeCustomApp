@@ -20,6 +20,7 @@ $order_processed=$result[0]['order_processed'];
 $order_shipped=$result[0]['order_shipped'];
 $out_for_delivey=$result[0]['out_for_delivery'];
 $delivered=$result[0]['delivered'];
+$cancel_status=$result[0]['cancel_order'];
 }
 ?>
 <!DOCTYPE html>
@@ -40,10 +41,21 @@ $delivered=$result[0]['delivered'];
      
     </div>
     <div class="col-sm-8 text-left"> 
+      <a href="../index.php" class="btn btn-info btn-lg float-right" >Track New Order</a>
       <h1>Customer Details</h1>
       <h5>Order Id: <?php echo $_SESSION['orderid']; ?></h5>
       <h5>Email Id: <?php echo $_SESSION['email']; ?></h5>
       <hr>
+      <?php if($cancel_status =="success"){ ?>
+      <div class="alert alert-success">
+        <strong>This order is successful !</strong>
+      </div>
+      <?php } ?>
+      <?php if($cancel_status == "cancel"){ ?>
+      <div class="alert alert-danger">
+        <strong>This Order is Canceled !</strong>
+      </div>
+      <?php } ?>
     </div>
     <?php If($result == '0 Results'){
         ?>
@@ -62,9 +74,6 @@ $delivered=$result[0]['delivered'];
                 <h5>ORDER ID  :<span class="text-primary font-weight-bold"><?php echo $_SESSION['orderid']; ?></span></h5>
             </div>
             <div class="d-flex flex-column text-sm-right">
-                <a href="../index.php">Back to Dashboard</a>
-                <p class="mb-0">Expected Arrival <span>01/12/19</span></p>
-                <p>USPS <span class="font-weight-bold">234094567242423422898</span></p>
             </div>
         </div> <!-- Add class 'active' to progress -->
         <div class="row d-flex justify-content-center">

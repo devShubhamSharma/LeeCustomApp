@@ -22,3 +22,10 @@ if($_REQUEST['action']=='updateorder'){
    ,$order_processed,$order_shipped,$out_for_delivey,$delivered,$email);
    print_r($data);
 }
+
+if($_REQUEST['action']=='cancelorder'){
+    print_r($_REQUEST);
+    $orderId=$_REQUEST['order_id'];
+    $obj->cancelorder($orderId);
+
+}

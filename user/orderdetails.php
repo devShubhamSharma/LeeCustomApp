@@ -27,7 +27,7 @@ $result=$obj->getOrderdetails($_SESSION['email']);
     /* Ensure that the demo table scrolls */
     th, td { white-space: nowrap; }
     div.dataTables_wrapper {
-        width: 80%;
+        width: 100%;
         margin: 0 auto;
     }
 </style>
@@ -35,7 +35,9 @@ $result=$obj->getOrderdetails($_SESSION['email']);
 
 </head>
 <body>
-    <h1 class="text-center my-5">All Order Details</h1>
+<div class="container">
+    <a href="../index.php" class="btn btn-info btn-lg float-right" >Track New Order</a>
+    <h1 class="text-center my-5">ALL ORDER DETAILS</h1>
     <?php  if($result== '0 results'){?> <h4 class="text-center">No Order found using this Email Id</h4> <?php }?>
     <div class="table-responsive">
     <table id="table" class="stripe row-border order-column" style="width:100%">
@@ -76,7 +78,7 @@ $result=$obj->getOrderdetails($_SESSION['email']);
     </tbody>
     </table>
    </div>
-   
+    </div>
     <script>
         $(function(){
             // $("#load").click(function(){

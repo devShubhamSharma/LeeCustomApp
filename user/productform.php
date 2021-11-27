@@ -11,6 +11,7 @@
 </head>
 
 <body>
+<?php include 'header.php'; ?>
 <div class="form-box">
    <div class="row">
      <div class="container">

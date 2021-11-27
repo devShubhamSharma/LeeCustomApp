@@ -82,13 +82,32 @@ class Admin{
         if ($result->num_rows > 0) {
             // output data of each row
             $i=1;
-            while($row = $result->fetch_assoc()) {              
+            $logofile;
+            $samplefile;
+            while($row = $result->fetch_assoc()) {  
+                 if($row["logo_file"]=='') {
+                    $logofile="No file available";
+                 }else{
+                    $logofile="<a target='_blank' href='../images/".$row["logo_file"]."'>Get logo file</a>";
+                 }   
+                 if($row["sample_file"]=='') {
+                    $samplefile="No file available";
+                 }else{
+                    $samplefile="<a target='_blank' href='../images/".$row["sample_file"]."'>Get logo file</a>";
+                 }           
                  $data['data'][]=array($i,$row["order_id"],$row["email"],$row["phone"],$row["description"],$row["product_info"],
                  $row["quantity"],$row["selected_date"],$row["logos_name"],
-                 "<a target='_blank' href='../images/".$row["logo_file"]."'>Get logo file</a>",
+                 $logofile,
                  $row["department"],$row["site"],$row["project_owner"],
-                 "<a target='_blank' href='../images/".$row["sample_file"]."'>Get logo file</a>",
-                 $row["order_date"],"<form method='post' action='updateorder.php'><input type='hidden' name='order_id' value=".$row["order_id"]."><button type='submit' class='btn btn-success' data-id=".$row["order_id"].">Update Status</button>" );
+                 $samplefile,
+                 $row["order_date"],"
+                 <form method='post' action='viewdetails.php'><input type='hidden' name='order_id' value=".$row["order_id"]."><button type='submit' name='submit' class='btn btn-success' data-id=".$row["order_id"].">
+                 View Details
+                 </button>",
+                 "
+                 <form method='post' action='updateorder.php'><input type='hidden' name='order_id' value=".$row["order_id"]."><button type='submit' class='btn btn-success' data-id=".$row["order_id"].">
+                 Update Status
+                 </button>" );
                  $i++;
             }
             return $data;
@@ -177,7 +196,7 @@ class Admin{
         }
         if($delivered==1 && $satuts_delivered==0){
             $q="UPDATE `statustable` SET
-            `delivered`='$delivered',`date_delivered`='$date'
+            `delivered`='$delivered',`date_delivered`='$date',`cancel_order`='success'
              WHERE `order_id`='$orderId'";
              $this->updateUser($email,6,$orderId);
         }
@@ -187,6 +206,30 @@ class Admin{
         } else {
             echo "Error updating record: " . $this->con->error;
         }
+    }
+
+    function getAlldetails($orderId){
+        $q="SELECT * FROM `productform` WHERE `order_id`='$orderId'";
+        $result=$this->con->query($q);
+        if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            $res[]=$row;
+        }
+        return $res;
+        } else {
+            echo "0 results";
+        }
+    }
+
+    function cancelorder($orderId){
+        $q="UPDATE `statustable` SET
+            `cancel_order`='cancel' WHERE `order_id`='$orderId'";
+        if ($this->con->query($q) === TRUE) {
+            echo "Record Canceled successfully";
+        } else {
+            echo "Error updating record: " . $this->con->error;
+        }    
+
     }
 
 }

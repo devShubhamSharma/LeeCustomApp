@@ -22,7 +22,7 @@ if (!isset($_SESSION['email'])) {
     /* Ensure that the demo table scrolls */
     th, td { white-space: nowrap; }
     div.dataTables_wrapper {
-        width: 80%;
+        width: 100%;
         margin: 0 auto;
     }
 </style>
@@ -56,6 +56,7 @@ if (!isset($_SESSION['email'])) {
             <th>Project Owner</th>
             <th>Sample File</th>
             <th>Order Date</th>
+            <th>View Details</th>
             <th>Status</th>
         </tr>
      </thead>
@@ -77,7 +78,7 @@ if (!isset($_SESSION['email'])) {
                     fixedColumns:   true,
                     fixedColumns:   {
                         left: 3,
-                        right: 1
+                        right: 2
                     },
                     stateSave: true,
                     bDestroy : true,

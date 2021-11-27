@@ -18,6 +18,7 @@ $order_processed=$result[0]['order_processed'];
 $order_shipped=$result[0]['order_shipped'];
 $out_for_delivey=$result[0]['out_for_delivery'];
 $delivered=$result[0]['delivered'];
+$cancel_status=$result[0]['cancel_order'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -37,11 +38,23 @@ $delivered=$result[0]['delivered'];
      
     </div>
     <div class="col-sm-8 text-left"> 
+    <a href="dashboard.php" class="btn btn-info btn-lg float-right"><span class="glyphicon glyphicon-home"></span>Back To Dashboard</a>
       <h1>Customer Details</h1>
       <h5>Order Id: <?php echo $_SESSION['order_id']; ?></h5>
       <h5>Email Id: <?php echo $result[0]['email']; ?></h5>
       <hr>
       <h1>update Order Status</h1>
+      <?php if($cancel_status =="success"){ ?>
+      <div class="alert alert-success">
+        <strong>This order is successful !</strong>
+      </div>
+      <?php } ?>
+      <?php if($cancel_status == "cancel"){ ?>
+      <div class="alert alert-danger">
+        <strong>This Order is Canceled !</strong>
+      </div>
+      <?php } ?>
+      <?php if($cancel_status =="none"){ ?>
       <form id="updateorder">
       <div class="form-check"> 
             <input type="hidden" id="order_id" value="<?php echo $_SESSION['order_id']; ?>" >
@@ -78,7 +91,9 @@ $delivered=$result[0]['delivered'];
             </div>
             <button type="submit" id="update" <?php if($delivered==1){ echo " disabled "; } ?> class="btn btn-primary">Update Status</button>
         </form>
-    </div>
+        <?php } ?>
+      </div>
+    
     
 
     <div class="container-fluid">
@@ -89,9 +104,10 @@ $delivered=$result[0]['delivered'];
                 <h5>ORDER ID  :<span class="text-primary font-weight-bold"><?php echo $_SESSION['order_id']; ?></span></h5>
             </div>
             <div class="d-flex flex-column text-sm-right">
-                <a href="dashboard.php">Back to Dashboard</a>
-                <p class="mb-0">Expected Arrival <span>01/12/19</span></p>
-                <p>USPS <span class="font-weight-bold">234094567242423422898</span></p>
+             <?php if($cancel_status =="none"){ ?>
+             <input type="hidden" id="orderid" value="<?php echo $_SESSION['order_id']; ?>" >
+             <button type="button" id="cancelorder"  class="btn btn-danger float-right">Cancel Order</button>
+            <?php } ?>
             </div>
         </div> <!-- Add class 'active' to progress -->
         <div class="row d-flex justify-content-center">
@@ -207,7 +223,30 @@ $delivered=$result[0]['delivered'];
           }
         });
        
-      })
+      });
+
+      $("#cancelorder").on("click", function(e){
+        var r=confirm("Are you sure to cancel order !");
+        if (r == true) {
+            var orderid= $("#orderid").val();
+            console.log(orderid);
+            $.ajax({
+            type: "POST",
+            url: "medium.php",
+            data: { order_id: orderid,action:'cancelorder' },
+            beforeSend: function(){
+                $("#update").text("updating the status...");
+            },
+            success: data=>{
+                console.log(data);
+                location.reload();
+            }
+            });
+        } else {
+            console.log('hgjgjh');
+        }
+      });
+
  })
 </script>
 

@@ -40,8 +40,9 @@ if (isset($_POST['login'])) {
 
     <!-- Login Form -->
     <form method="post">
-      <input type="text" id="login" class="fadeIn second" name="email" placeholder="Email Id">
-      <input type="text" id="password" class="fadeIn third" name="password" placeholder="password">
+      <input type="text" id="login" class="fadeIn second text" name="email" placeholder="Email Id">
+      <input type="password" id="password" class="fadeIn third text" name="password" placeholder="password"><br>
+      <input type="checkbox" id="showPassword" />Show password<br>
       <input type="submit" class="fadeIn fourth" name="login" value="Log In">
     </form>
 
@@ -52,6 +53,15 @@ if (isset($_POST['login'])) {
 
   </div>
 </div>
+<script>
+  document.getElementById('showPassword').onclick = function() {
+    if ( this.checked ) {
+       document.getElementById('password').type = "text";
+    } else {
+       document.getElementById('password').type = "password";
+    }
+};
+  </script>
     
 </body>
 </html>
