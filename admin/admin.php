@@ -22,6 +22,8 @@ class Admin{
             $msg="Your Order out for delivery";
         }elseif($flag==6){
             $msg="Your Order Delivered";
+        }elseif($flag==7){
+            $msg="Your Order is canceled by Admin";
         }
 
         $message=$msg." <br> For Order Id <b>".$orderId."</b><br>"."<b>Date: </b>".date("Y-m-d");
@@ -73,7 +75,10 @@ class Admin{
     }
 
     function getAllRecord(){
-        $q="SELECT * FROM `productform`";
+        $q="SELECT *
+        FROM `productform`
+        INNER JOIN `statustable`
+        ON productform.order_id=statustable.order_id";
         $arr = []; 
         $result=$this->con->query($q);
         
@@ -221,11 +226,12 @@ class Admin{
         }
     }
 
-    function cancelorder($orderId){
+    function cancelorder($orderId,$email){
         $q="UPDATE `statustable` SET
             `cancel_order`='cancel' WHERE `order_id`='$orderId'";
         if ($this->con->query($q) === TRUE) {
             echo "Record Canceled successfully";
+            $this->updateUser($email,7,$orderId);
         } else {
             echo "Error updating record: " . $this->con->error;
         }    

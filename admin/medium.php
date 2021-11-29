@@ -26,6 +26,7 @@ if($_REQUEST['action']=='updateorder'){
 if($_REQUEST['action']=='cancelorder'){
     print_r($_REQUEST);
     $orderId=$_REQUEST['order_id'];
-    $obj->cancelorder($orderId);
+    $email=$_REQUEST['email'];
+    $obj->cancelorder($orderId,$email);
 
 }

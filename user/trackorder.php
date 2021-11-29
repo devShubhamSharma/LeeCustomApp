@@ -41,7 +41,8 @@ $cancel_status=$result[0]['cancel_order'];
      
     </div>
     <div class="col-sm-8 text-left"> 
-      <a href="../index.php" class="btn btn-info btn-lg float-right" >Track New Order</a>
+      <a href="../index.php" class="btn btn-info btn-lg float-right mx-2" >Track New Order</a>
+      <a href="orderdetails.php" class="btn btn-info btn-lg float-right">Goto Dashboard</a>
       <h1>Customer Details</h1>
       <h5>Order Id: <?php echo $_SESSION['orderid']; ?></h5>
       <h5>Email Id: <?php echo $_SESSION['email']; ?></h5>
