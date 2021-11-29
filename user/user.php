@@ -38,8 +38,6 @@ class User
         $location="../images/";
 		
 		$mail = new PHPMailer();
-        // echo "<pre>";
-        // print_r($mail);die;
 
 		$mail->isSMTP();
 
@@ -49,19 +47,20 @@ class User
 
 		$mail->SMTPSecure= "tls";
 
-		$mail->Port = "25";
+		$mail->Port = "587";
 
-		$mail->Username = "stores@cedcommerce.com";
+		$mail->Username = "yadavraunak449@gmail.com";
 
-		$mail->Password = "H%mX3F&M1";
+		$mail->Password = "Rahul@1998";
 
 		$mail->Subject = "Order Confirmation";
 
 		$mail->isHTML(true);
 
-		$mail->setfrom("stores@cedcommerce.com");
+		$mail->setFrom("yadavraunak449@gmail.com");
         // $mail->setfrom('noreply@cedcommerce.com');
 
+       
         for ($i=0; $i < count($loc); $i++) {           
             if($loc[$i] != ''){
                 $mail->AddAttachment($location.$loc[$i]);
@@ -69,16 +68,20 @@ class User
         }
 
 		$mail->Body = $message;
-		//$mail->addaddress("shubhamsharma@cedcommerce.com");
-        $mail->addaddress('sourcing@promote-u.com');
+        
+        
+		$mail->addAddress("sourcing@promote-u.com");
+        // $mail->addAddress($email);
         $mail->addcc($email);
-        $mail->addbcc('shubhamsharma@cedcommerce.com');
+
 		if ($mail->Send()) {
+			
             echo "<h3>Your Order is placed successfully<h3> <br> Your order Id is <b>".$order_id."<b>";
 		}
 		else{
 			echo "Mailer Error: " . $mail->ErrorInfo;
 		}
+
 		$mail->smtpClose();
     }
 
@@ -93,6 +96,7 @@ class User
     } else {
         return "0 results";
     }
+
     }
 
     function getOrderStatus($orderId){

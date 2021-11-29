@@ -7,9 +7,9 @@
       public $conn;
 
       function  __construct(){
-        $this->hostname="shopify-clients.cluster-c07abb6qygwc.us-east-2.rds.amazonaws.com";
-        $this->username="admin";
-        $this->password="hKx2;aX-e;dFKq]t";
+        $this->hostname="localhost";
+        $this->username="root";
+        $this->password="";
         $this->dbname="leecustomapp";
       }
 
