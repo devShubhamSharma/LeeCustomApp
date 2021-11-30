@@ -22,6 +22,8 @@ class Admin{
             $msg="Your Order out for delivery";
         }elseif($flag==6){
             $msg="Your Order Delivered";
+        }elseif($flag==7){
+            $msg="Your Order is canceled by Admin";
         }
 
         $message=$msg." <br> For Order Id <b>".$orderId."</b><br>"."<b>Date: </b>".date("Y-m-d");
@@ -73,7 +75,10 @@ class Admin{
     }
 
     function getAllRecord(){
-        $q="SELECT * FROM `productform`";
+        $q="SELECT *
+        FROM `productform`
+        INNER JOIN `statustable`
+        ON productform.order_id=statustable.order_id";
         $arr = []; 
         $result=$this->con->query($q);
         
@@ -84,7 +89,40 @@ class Admin{
             $i=1;
             $logofile;
             $samplefile;
+            $status="Order Recieved";
             while($row = $result->fetch_assoc()) {  
+                // Getting current Status
+                if($row['cancel_order']=='none'){
+                if(($row['order_approved']==1) && ($row['orderin_production']==0) && ($row['order_processed']==0) && ($row['order_shipped']==0)
+                && ($row['out_for_delivery']==0 && $row['delivered']==0)){
+                    $status="Order Approved";
+                }elseif(($row['order_approved']==1) && ($row['orderin_production']==1) && ($row['order_processed']==0) && ($row['order_shipped']==0)
+                && ($row['out_for_delivery']==0) && ($row['delivered']==0)){
+                    $status="Order In Production";
+                }elseif(($row['order_approved']==1) && ($row['orderin_production']==1) && ($row['order_processed']==1) && ($row['order_shipped']==0)
+                && ($row['out_for_delivery']==0 && $row['delivered']==0)){
+                    $status="Order Is Processed";
+                }elseif(($row['order_approved']==1) && ($row['orderin_production']==1) && ($row['order_processed']==1) && ($row['order_shipped']==1)
+                && ($row['out_for_delivery']==0 && $row['delivered']==0)){
+                    $status="Order Shipped";
+                }elseif(($row['order_approved']==1) && ($row['orderin_production']==1) && ($row['order_processed']==1) && ($row['order_shipped']==1)
+                && ($row['out_for_delivery']==1 && $row['delivered']==0)){
+                    $status="Out For delivery";
+                }elseif(($row['order_approved']==1) && ($row['orderin_production']==1) && ($row['order_processed']==1) && ($row['order_shipped']==1)
+                 && ($row['out_for_delivery']==1 && $row['delivered']==1)
+                ){
+                    $status="Delivered";
+                }
+            }else {
+                # code...
+                if($row['cancel_order']=='cancel'){
+                    $status="Canceled";
+                }else {
+                    $status="Completed";
+                }
+            }
+
+                //Checking whether file is uploaded or not
                  if($row["logo_file"]=='') {
                     $logofile="No file available";
                  }else{
@@ -100,8 +138,8 @@ class Admin{
                  $logofile,
                  $row["department"],$row["site"],$row["project_owner"],
                  $samplefile,
-                 $row["order_date"],"
-                 <form method='post' action='viewdetails.php'><input type='hidden' name='order_id' value=".$row["order_id"]."><button type='submit' name='submit' class='btn btn-success' data-id=".$row["order_id"].">
+                 $row["order_date"],$status,
+                 "<form method='post' action='viewdetails.php'><input type='hidden' name='order_id' value=".$row["order_id"]."><button type='submit' name='submit' class='btn btn-success' data-id=".$row["order_id"].">
                  View Details
                  </button>",
                  "
@@ -221,11 +259,12 @@ class Admin{
         }
     }
 
-    function cancelorder($orderId){
+    function cancelorder($orderId,$email){
         $q="UPDATE `statustable` SET
             `cancel_order`='cancel' WHERE `order_id`='$orderId'";
         if ($this->con->query($q) === TRUE) {
             echo "Record Canceled successfully";
+            $this->updateUser($email,7,$orderId);
         } else {
             echo "Error updating record: " . $this->con->error;
         }    

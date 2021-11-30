@@ -159,6 +159,17 @@ $cancel_status=$result[0]['cancel_order'];
 
 <script>
     $(function(){
+        $('.checkbox').each(function(i){
+           if(($(this).is(':disabled')&&($(this).is(':checked')))) {
+               console.log('yes');
+               $(this).next().attr('disabled',false);
+               console.log(i);
+           }else{
+            //    $(this).attr('disabled',true);
+            //    console.log(i+1);
+               $('.checkbox:eq('+(i+1)+')').attr('disabled',true);
+           }
+        })
     $("#updateorder").on("submit", function(e){
         e.preventDefault();
         var order_approved;
@@ -229,13 +240,14 @@ $cancel_status=$result[0]['cancel_order'];
         var r=confirm("Are you sure to cancel order !");
         if (r == true) {
             var orderid= $("#orderid").val();
+            var email=$('#email').val();
             console.log(orderid);
             $.ajax({
             type: "POST",
             url: "medium.php",
-            data: { order_id: orderid,action:'cancelorder' },
+            data: { order_id: orderid,email: email,action:'cancelorder' },
             beforeSend: function(){
-                $("#update").text("updating the status...");
+                $("#cancelorder").text("Canceling the order...");
             },
             success: data=>{
                 console.log(data);
