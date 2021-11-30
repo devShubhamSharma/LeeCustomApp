@@ -49,15 +49,15 @@ class User
 
 		$mail->Port = "587";
 
-		$mail->Username = "yadavraunak449@gmail.com";
+		$mail->Username = "stores@cedcommerce.com";
 
-		$mail->Password = "Rahul@1998";
+		$mail->Password = "H%mX3F&M1";
 
 		$mail->Subject = "Order Confirmation";
 
 		$mail->isHTML(true);
 
-		$mail->setFrom("yadavraunak449@gmail.com");
+		$mail->setfrom("stores@cedcommerce.com");
         // $mail->setfrom('noreply@cedcommerce.com');
 
        
@@ -69,10 +69,9 @@ class User
 
 		$mail->Body = $message;
         
-        
-		$mail->addAddress("sourcing@promote-u.com");
-        // $mail->addAddress($email);
-        $mail->addcc($email);
+		// $mail->addaddress("shubhamsharma@cedcommerce.com");
+        $mail->addAddress($email);
+        // $mail->addcc($email);
 
 		if ($mail->Send()) {
 			
@@ -99,12 +98,17 @@ class User
 
     }
 
-    function getOrderStatus($orderId){
-        $q="SELECT *
-        FROM productform
-        LEFT JOIN statustable
-        ON productform.order_id = statustable.order_id
-        WHERE productform.order_id IN ('$orderId') ORDER BY statustable.order_id ";
+    function getOrderStatus($orderId,$email){
+        // $q="SELECT *
+        // FROM productform
+        // LEFT JOIN statustable
+        // ON productform.order_id = statustable.order_id
+        // WHERE productform.order_id IN ('$orderId') ORDER BY statustable.order_id ";
+         $q="SELECT *
+         FROM productform
+         LEFT JOIN statustable
+         ON productform.order_id = statustable.order_id
+         WHERE productform.order_id IN ('$orderId') AND productform.email IN ('$email') ORDER BY statustable.order_id ";
         $result=$this->con->query($q);
         if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
@@ -112,7 +116,7 @@ class User
         }
             return $res;
         }else{
-            return $this->con->error;
+            return '0 Results';
         }
 
     }
