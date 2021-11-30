@@ -56,8 +56,9 @@ if (!isset($_SESSION['email'])) {
             <th>Project Owner</th>
             <th>Sample File</th>
             <th>Order Date</th>
+            <th>Current Status</th>
             <th>View Details</th>
-            <th>Status</th>
+            <th>Update Status</th>
         </tr>
      </thead>
      <tbody>
@@ -77,8 +78,8 @@ if (!isset($_SESSION['email'])) {
                     paging:         false,
                     fixedColumns:   true,
                     fixedColumns:   {
-                        left: 3,
-                        right: 2
+                        left: 2,
+                        right: 3
                     },
                     stateSave: true,
                     bDestroy : true,
