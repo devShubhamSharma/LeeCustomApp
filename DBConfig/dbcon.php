@@ -10,7 +10,7 @@
         $this->hostname="localhost";
         $this->username="root";
         $this->password="";
-        $this->dbname="leecustomapp";
+        $this->dbname="leecustom";
       }
 
       function mkconnection(){
