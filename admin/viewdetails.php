@@ -24,7 +24,7 @@ $samplefile=$result[0]['sample_file'];
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Details</title>
-    <?php include('../cdn/data-cdn.php'); ?>
+    <?php include('../data-cdn.php'); ?>
 </head>
 <body>
 <div class="jumbotron jumbotron-fluid">

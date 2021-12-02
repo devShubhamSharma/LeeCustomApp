@@ -18,9 +18,9 @@ $result=$obj->getOrderdetails($_SESSION['email']);
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Product Form</title>
-  <?php include('../cdn/data-cdn.php'); ?>
+  <?php include('../data-cdn.php'); ?>
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
-  
+  <link rel="stylesheet" type="text/css" href="../css/style.css">
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
 <style>
     /* Ensure that the demo table scrolls */
@@ -35,9 +35,17 @@ $result=$obj->getOrderdetails($_SESSION['email']);
 
 </head>
 <body>
+<?php require 'nav.php' ?>
+<div class="container-fluid" id="main">
+<div class="c-row-bg row row-offcanvas row-offcanvas-left">
+<?php require 'side-bar.php'; ?>
+
+<div class="pt-4 col-md-9 col-lg-10 main">
+<div class="container-fluid mb-4">
+  <h2 class="c-heading-h2">ALL ORDER DETAILS</h>
+</div>
 <div class="container">
-    <a href="../index.php" class="btn btn-info btn-lg float-right" >Track New Order</a>
-    <h1 class="text-center my-5">ALL ORDER DETAILS</h1>
+    
     <?php  if($result== '0 results'){?> <h4 class="text-center">No Order found using this Email Id</h4> <?php }?>
     <div class="table-responsive">
     <table id="table" class="stripe row-border order-column" style="width:100%">
@@ -79,6 +87,9 @@ $result=$obj->getOrderdetails($_SESSION['email']);
     </table>
    </div>
     </div>
+
+</div>
+
     <script>
         $(function(){
             // $("#load").click(function(){

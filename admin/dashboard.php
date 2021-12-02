@@ -12,12 +12,12 @@ if (!isset($_SESSION['email'])) {
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Product Form</title>
-  <?php include('../cdn/data-cdn.php'); ?>
+  <?php include('../data-cdn.php'); ?>
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/fixedcolumns/4.0.1/css/fixedColumns.dataTables.min.css">
   <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
   <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/fixedcolumns/4.0.1/js/dataTables.fixedColumns.min.js"></script>
- 
+  <link rel="stylesheet" type="text/css" href="../css/style.css">
 <style>
     /* Ensure that the demo table scrolls */
     th, td { white-space: nowrap; }
@@ -30,6 +30,7 @@ if (!isset($_SESSION['email'])) {
 
 </head>
 <body>
+<?php require 'nav.php'; ?>
 <div class="jumbotron">
   <h1 class="display-4 text-center">Order Details</h1>
  <div class="container">

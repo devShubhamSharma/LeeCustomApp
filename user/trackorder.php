@@ -30,19 +30,34 @@ $cancel_status=$result[0]['cancel_order'];
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update Order</title>
-    <?php include('../cdn/data-cdn.php'); ?>
+    <?php include('../data-cdn.php'); ?>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="../css/orderstatus.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
+    <?php require 'nav.php' ?>
+    <div class="container-fluid" id="main">
+    <div class="c-row-bg row row-offcanvas row-offcanvas-left">
+    <div class="c-sidebar pt-4 col-md-3 col-lg-2 sidebar-offcanvas" id="sidebar" role="navigation">
+
+    <ul class="nav flex-column pl-1">
+        <li class="nav-item">
+        <a class="nav-link c-link" href="../index.php">Track Order</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link c-link" href="orderdetails.php">Goto Dashboard</a>
+        </li>
+    </ul>
+    </div>
+
+    <div class="pt-4 col-md-9 col-lg-10 main">
     <div class="container-fluid text-center my-5">    
-  <div class="row content">
+    <div class="row content">
     <div class="col-sm-2 sidenav">
      
     </div>
     <div class="col-sm-8 text-left"> 
-      <a href="../index.php" class="btn btn-info btn-lg float-right mx-2" >Track New Order</a>
-      <a href="orderdetails.php" class="btn btn-info btn-lg float-right">Goto Dashboard</a>
       <h1>Customer Details</h1>
       <h5>Order Id: <?php echo $_SESSION['orderid']; ?></h5>
       <h5>Email Id: <?php echo $_SESSION['email']; ?></h5>
@@ -123,7 +138,10 @@ $cancel_status=$result[0]['cancel_order'];
         </div>
     </div>
     <?php }?>
-</div>
+  </div>
+
+    </div>
+    
 
 
 
