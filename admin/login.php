@@ -25,12 +25,15 @@ if (isset($_POST['login'])) {
     <?php include('../data-cdn.php'); ?>
     <link rel="stylesheet" href="../css/login.css">
     <link rel="stylesheet" href="../css/style.css">
+
+
+
 </head>
 <body>
 <div class="wrapper fadeInDown">
   <div id="formContent">
     <!-- Tabs Titles -->
-    <div class="alert alert-success" role="alert">
+    <div class="card-header c-login alert alert-success p-3" role="alert">
       Admin LogIn
    </div>
     <!-- Icon -->
@@ -40,10 +43,10 @@ if (isset($_POST['login'])) {
 
     <!-- Login Form -->
     <form method="post">
-      <input type="text" id="login" class="fadeIn second text" name="email" placeholder="Email Id">
-      <input type="password" id="password" class="fadeIn third text" name="password" placeholder="password"><br>
-      <input type="checkbox" id="showPassword" />Show password<br>
-      <input type="submit" class="fadeIn fourth" name="login" value="Log In">
+      <input type="text" id="login" class="fadeIn second text mt-4" name="email" placeholder="email id">
+      <input type="password" id="password" class="fadeIn third text mb-4" name="password" placeholder="password"><br>
+      <input type="checkbox" id="showPassword" class="mr-2"/>Show password<br>
+      <input type="submit" class="login-btn fadeIn fourth mt-4" name="login" value="Log In">
     </form>
 
     <!-- Remind Passowrd -->

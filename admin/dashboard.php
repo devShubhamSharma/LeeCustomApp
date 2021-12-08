@@ -25,18 +25,18 @@ if (!isset($_SESSION['email'])) {
         width: 100%;
         margin: 0 auto;
     }
+    
 </style>
 
 
 </head>
 <body>
 <?php require 'nav.php'; ?>
-<div class="jumbotron">
-  <h1 class="display-4 text-center">Order Details</h1>
+<div class="jumbotron c-full-height"> 
+  <div class="c-heading-border mb-4">
+  <h2 class="c-heading-h2">Dashboard</h2>
+  </div>
  <div class="container">
-  <p class="lead">
-    <a class="btn btn-primary btn-lg" href="logout.php" role="button">Logout</a>
-  </p>
 </div>
   <div class="table-responsive">
     <table id="table" class="stripe row-border order-column" style="width:100%">
@@ -91,9 +91,32 @@ if (!isset($_SESSION['email'])) {
                         url: "medium.php",
                         dataSrc: "data"
                     }
+
+
                 } );
         
       });
+      
+    //   $('#table').DataTable( {
+    //     responsive: {
+    //     details: false
+    // }
+    // } );
+         
+            // $( document ).ready(function() {
+            // if ($(window).width() < 1000){
+            // $(function(){
+            // $('#table').DataTable( {    
+            //         fixedColumns:   false,
+            //         fixedColumns:   {
+            //             left: 0,
+            //             right: 0
+            //         }
+            //         });
+            //     });
+            // }
+            // });
+
     </script>
 </body>
 </html>

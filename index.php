@@ -4,9 +4,9 @@
 <div class="c-row-bg row row-offcanvas row-offcanvas-left">
 <?php require 'side-bar.php'; ?>
 
-<div class="pt-4 col-md-9 col-lg-10 main">
+<div class="pt-4 col-md-9 col-lg-10 main c-full-height">
 <div class="container-fluid mb-4">
-  <h2 class="c-heading-h2">Dashboard</h>
+  <h2 class="c-heading-h2">Dashboard</h2>
 </div>
 <div class="my-2">
 <div id="accordion">
