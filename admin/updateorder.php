@@ -115,7 +115,7 @@ $cancel_status=$result[0]['cancel_order'];
                 <input type="checkbox" id="check6"  <?php if($delivered==1){ echo "checked disabled"; } ?> name="delivered" class="form-check-input checkbox">Order Arrived
             </label>
             </div>
-            <button type="submit" id="update" <?php if($delivered==1){ echo " disabled "; } ?> class="btn btn-primary">Update Status</button>
+            <button type="submit" id="update" <?php if($delivered==1){ echo " disabled "; } ?> class="c-submit-btn mt-4 btn btn-primary">Update Status</button>
         </form>
         <?php } ?>
       </div>
@@ -151,7 +151,7 @@ $cancel_status=$result[0]['cancel_order'];
         </div>
         <div class="row justify-content-between top">
             <div class="row d-flex icon-content"> 
-                    <img class="icon" src="icons/icon-1.png">
+                    <img class="icon" src="icons/icon10.png">
                     <div class="d-flex flex-column">
                         <p class="font-weight-bold c-icon-with-content">Order Approved</p>
                     </div>
