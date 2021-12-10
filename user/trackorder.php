@@ -59,8 +59,11 @@ $cancel_status=$result[0]['cancel_order'];
     </div>
     <div class="col-sm-8 text-left"> 
       <h1>Customer Details</h1>
-      <h5>Order Id: <?php echo $_SESSION['orderid']; ?></h5>
-      <h5>Email Id: <?php echo $_SESSION['email']; ?></h5>
+      <h5 class="c-order-deatils">Order Id: <?php echo $_SESSION['orderid']; ?></h5>
+      <h5 class="c-order-deatils">Email Id: <?php echo $_SESSION['email']; ?></h5>
+      <!-- <?php if($result[0]['date_inproduction'] != "0"){ ?>
+        <h5 class="c-order-deatils">In Production Date : <span class="font-weight-bold"><?php echo $result[0]['date_inproduction']; ?></span></h5>
+     <?php } ?> -->
       <hr>
       <?php if($cancel_status =="success"){ ?>
       <div class="alert alert-success">
