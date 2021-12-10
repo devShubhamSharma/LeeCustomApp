@@ -46,22 +46,34 @@ $cancel_status=$result[0]['cancel_order'];
         <a class="nav-link c-link" href="../index.php">Track Order</a>
         </li>
         <li class="nav-item">
-        <a class="nav-link c-link" href="orderdetails.php">Goto Dashboard</a>
-        </li>
+          <a class="nav-link c-link" href="./user/productform.php">Create Custom Order</a>
+          </li>
     </ul>
     </div>
 
     <div class="pt-4 col-md-9 col-lg-10 main">
+    <div class="container-fluid mb-4">
+  <div class="c-row">
+  <a class="c-back-button" href="javascript:history.go(-1)">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 330 330" style="enable-background:new 0 0 330 330;" xml:space="preserve">
+<path id="XMLID_6_" d="M165,0C74.019,0,0,74.019,0,165s74.019,165,165,165s165-74.019,165-165S255.981,0,165,0z M205.606,234.394
+	c5.858,5.857,5.858,15.355,0,21.213C202.678,258.535,198.839,260,195,260s-7.678-1.464-10.606-4.394l-80-79.998
+	c-2.813-2.813-4.394-6.628-4.394-10.606c0-3.978,1.58-7.794,4.394-10.607l80-80.002c5.857-5.858,15.355-5.858,21.213,0
+	c5.858,5.857,5.858,15.355,0,21.213l-69.393,69.396L205.606,234.394z"/>
+<g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g><g></g><g></g><g></g><g></g><g></g>
+</svg>
+Back&nbsp;to&nbsp;
+<span id="previous_page_name"></span></a>
+</div>
+</div>
     <div class="container-fluid text-center my-5">    
     <div class="row content">
-    <div class="col-sm-2 sidenav">
-     
-    </div>
     <div class="col-sm-8 text-left"> 
-      <h1>Customer Details</h1>
-      <h5>Order Id: <?php echo $_SESSION['orderid']; ?></h5>
-      <h5>Email Id: <?php echo $_SESSION['email']; ?></h5>
-      <hr>
+      <h1 class="c-heading-h2">Customer Details</h1>
+      <h5 class="c-order-deatils">Order Id: <?php echo $_SESSION['orderid']; ?></h5>
+      <h5 class="c-order-deatils">Email Id: <?php echo $_SESSION['email']; ?></h5>
+      
       <?php if($cancel_status =="success"){ ?>
       <div class="alert alert-success">
         <strong>This order is successful !</strong>
@@ -83,11 +95,11 @@ $cancel_status=$result[0]['cancel_order'];
     ?>
    <?php If($result != '0 Results'){?>
     <div class="container-fluid">
-    <h1>Current Status</h1>
+    <h1 class="c-heading-h2 mt-3">Current Status</h1>
     <div class="card">
         <div class="row d-flex justify-content-between px-3 top">
             <div class="d-flex">
-                <h5>ORDER ID  :<span class="text-primary font-weight-bold"><?php echo $_SESSION['orderid']; ?></span></h5>
+                <h5>ORDER ID  :<span class="font-weight-bold"><?php echo $_SESSION['orderid']; ?></span></h5>
             </div>
             <div class="d-flex flex-column text-sm-right">
             </div>
@@ -105,34 +117,40 @@ $cancel_status=$result[0]['cancel_order'];
             </div>
         </div>
         <div class="row justify-content-between top">
-        <div class="row d-flex icon-content"> 
+            <div class="row d-flex icon-content"> 
+                    <img class="icon" src="../admin/icons/icon10.png">
+                    <div class="d-flex flex-column">
+                        <p class="font-weight-bold c-icon-with-content">Order Approved</p>
+                    </div>
+            </div>
+            <div class="row d-flex icon-content"> 
+                <img class="icon" src="../admin/icons/icon-1.png">
                 <div class="d-flex flex-column">
-                    <p class="font-weight-bold">Order<br>Approved</p>
+                    <p class="font-weight-bold c-icon-with-content">Order<br>In Production</p>
                 </div>
             </div>
             <div class="row d-flex icon-content"> 
+                <img class="icon" src="../admin/icons/icons.png">
                 <div class="d-flex flex-column">
-                    <p class="font-weight-bold">Order<br>In Production</p>
+                    <p class="font-weight-bold c-icon-with-content">Order<br>Processed</p>
                 </div>
             </div>
-            <div class="row d-flex icon-content"> <img class="icon" src="../admin/icons/icons.png">
+            <div class="row d-flex icon-content"> 
+                <img class="icon" src="../admin/icons/icon2.png">
                 <div class="d-flex flex-column">
-                    <p class="font-weight-bold">Order<br>Processed</p>
+                    <p class="font-weight-bold c-icon-with-content">Order<br>Shipped</p>
                 </div>
             </div>
-            <div class="row d-flex icon-content"> <img class="icon" src="../admin/icons/icon2.png">
+            <div class="row d-flex icon-content"> 
+                <img class="icon" src="../admin/icons/icon3.png">
                 <div class="d-flex flex-column">
-                    <p class="font-weight-bold">Order<br>Shipped</p>
+                    <p class="font-weight-bold c-icon-with-content">Order<br>En Route</p>
                 </div>
             </div>
-            <div class="row d-flex icon-content"> <img class="icon" src="../admin/icons/icon3.png">
+            <div class="row d-flex icon-content"> 
+                <img class="icon" src="../admin/icons/icon4.png">
                 <div class="d-flex flex-column">
-                    <p class="font-weight-bold">Order<br>En Route</p>
-                </div>
-            </div>
-            <div class="row d-flex icon-content"> <img class="icon" src="../admin/icons/icon4.png">
-                <div class="d-flex flex-column">
-                    <p class="font-weight-bold">Order<br>Arrived</p>
+                    <p class="font-weight-bold c-icon-with-content">Order<br>Arrived</p>
                 </div>
             </div>
         </div>
@@ -142,7 +160,21 @@ $cancel_status=$result[0]['cancel_order'];
 
     </div>
     
+<script>
+$( document ).ready(function() {
+let previous_url = document.referrer;
+let p_url_heading = previous_url.substring(previous_url.lastIndexOf('/') + 1);
+let p_url_heading_change = (p_url_heading.slice(0, p_url_heading.length - 4));
+console.log(p_url_heading_change);
+if(p_url_heading_change == "index"){
+    document.getElementById("previous_page_name").innerHTML = 'Dashboard';
+}
+else{
+document.getElementById("previous_page_name").innerHTML = p_url_heading_change;
+}
+});
 
+</script>
 
 
 </body>

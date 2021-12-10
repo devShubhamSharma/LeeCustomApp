@@ -32,8 +32,8 @@ if (!isset($_SESSION['email'])) {
 </head>
 <body>
 <?php require 'nav.php'; ?>
-<div class="jumbotron c-full-height"> 
-  <div class="c-heading-border mb-4">
+<div class="container-fluid  c-full-height"> 
+  <div class="c-heading-border mb-4 mt-4">
   <h2 class="c-heading-h2">Dashboard</h2>
   </div>
  <div class="container">
@@ -76,7 +76,7 @@ if (!isset($_SESSION['email'])) {
                     scrollY:        "500px",
                     scrollX:        true,
                     scrollCollapse: true,
-                    paging:         false,
+                    paging:         true,
                     fixedColumns:   true,
                     fixedColumns:   {
                         left: 2,

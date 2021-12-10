@@ -366,14 +366,14 @@ Back to dashboard</a>
     <div class="modal-content">
 
       <!-- Modal Header -->
-      <div class="modal-header">
-        <h4 class="modal-title">Order Status & Details</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      <div class="modal-header card-header">
+        <h4 class="c-card-heading modal-title">Order Status & Details</h4>
+        <button type="text-white button" class="close" data-dismiss="modal">&times;</button>
       </div>
 
       <!-- Modal body -->
       <div class="modal-body">
-        <p id="result"></p>
+        <p id="result"  class="c-modal-message"></p>
       </div>
 
       <!-- Modal footer -->
