@@ -97,25 +97,6 @@ if (!isset($_SESSION['email'])) {
         
       });
       
-    //   $('#table').DataTable( {
-    //     responsive: {
-    //     details: false
-    // }
-    // } );
-         
-            // $( document ).ready(function() {
-            // if ($(window).width() < 1000){
-            // $(function(){
-            // $('#table').DataTable( {    
-            //         fixedColumns:   false,
-            //         fixedColumns:   {
-            //             left: 0,
-            //             right: 0
-            //         }
-            //         });
-            //     });
-            // }
-            // });
 
     </script>
 </body>

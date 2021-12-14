@@ -70,20 +70,10 @@ Back&nbsp;to&nbsp;
     <div class="container-fluid text-center my-5">    
     <div class="row content">
     <div class="col-sm-8 text-left"> 
-<<<<<<< HEAD
-      <h1>Customer Details</h1>
-      <h5 class="c-order-deatils">Order Id: <?php echo $_SESSION['orderid']; ?></h5>
-      <h5 class="c-order-deatils">Email Id: <?php echo $_SESSION['email']; ?></h5>
-      <!-- <?php if($result[0]['date_inproduction'] != "0"){ ?>
-        <h5 class="c-order-deatils">In Production Date : <span class="font-weight-bold"><?php echo $result[0]['date_inproduction']; ?></span></h5>
-     <?php } ?> -->
-      <hr>
-=======
       <h1 class="c-heading-h2">Customer Details</h1>
       <h5 class="c-order-deatils">Order Id: <?php echo $_SESSION['orderid']; ?></h5>
       <h5 class="c-order-deatils">Email Id: <?php echo $_SESSION['email']; ?></h5>
-      
->>>>>>> 62f923b3a0691885bebe00c8ed05747ada350d72
+      <?php if($result != '0 Results'){?>
       <?php if($cancel_status =="success"){ ?>
       <div class="alert alert-success">
         <strong>This order is successful !</strong>
@@ -94,6 +84,7 @@ Back&nbsp;to&nbsp;
         <strong>This Order is Canceled !</strong>
       </div>
       <?php } ?>
+      <?php }?>
     </div>
     <?php If($result == '0 Results'){
         ?>

@@ -19,6 +19,16 @@ $order_shipped=$result[0]['order_shipped'];
 $out_for_delivey=$result[0]['out_for_delivery'];
 $delivered=$result[0]['delivered'];
 $cancel_status=$result[0]['cancel_order'];
+
+// Status date
+// $date_order_approved=$result[0]['order_approved'];
+// $date_orderin_production=$result[0]['orderin_production'];
+// $date_order_processed=$result[0]['order_processed'];
+// $date_order_shipped=$result[0]['order_shipped'];
+// $date_out_for_delivey=$result[0]['out_for_delivery'];
+// $date_delivered=$result[0]['delivered'];
+// $date_cancel_status=$result[0]['cancel_order'];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
