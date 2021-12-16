@@ -21,6 +21,15 @@ $order_shipped=$result[0]['order_shipped'];
 $out_for_delivey=$result[0]['out_for_delivery'];
 $delivered=$result[0]['delivered'];
 $cancel_status=$result[0]['cancel_order'];
+
+
+// Status date
+$date_order_approved=$result[0]['date_order_approval'];
+$date_orderin_production=$result[0]['date_inproduction'];
+$date_order_processed=$result[0]['date_order_proccessed'];
+$date_order_shipped=$result[0]['date_shipped'];
+$date_out_for_delivey=$result[0]['date_out_for_delivery'];
+$date_delivered=$result[0]['date_delivered'];
 }
 ?>
 <!DOCTYPE html>
@@ -74,6 +83,24 @@ Back&nbsp;to&nbsp;
       <h5 class="c-order-deatils">Order Id: <?php echo $_SESSION['orderid']; ?></h5>
       <h5 class="c-order-deatils">Email Id: <?php echo $_SESSION['email']; ?></h5>
       <?php if($result != '0 Results'){?>
+        <?php if($date_order_approved != "0"){ ?>
+        <h5 class="c-order-deatils">Order Approval Date : <span class="font-weight-bold"><?php echo $date_order_approved; ?></span></h5>
+     <?php } ?>
+     <?php if($date_orderin_production != "0"){ ?>
+        <h5 class="c-order-deatils">In Production Date : <span class="font-weight-bold"><?php echo $date_orderin_production; ?></span></h5>
+     <?php } ?>
+     <?php if($date_order_processed != "0"){ ?>
+        <h5 class="c-order-deatils">Order Processed Date : <span class="font-weight-bold"><?php echo $date_order_processed; ?></span></h5>
+     <?php } ?>
+     <?php if($date_order_shipped != "0"){ ?>
+        <h5 class="c-order-deatils">Order Shipped Date : <span class="font-weight-bold"><?php echo $date_order_shipped; ?></span></h5>
+     <?php } ?>
+     <?php if($date_out_for_delivey != "0"){ ?>
+        <h5 class="c-order-deatils">Out for Delivery Date : <span class="font-weight-bold"><?php echo $date_out_for_delivey; ?></span></h5>
+     <?php } ?>
+     <?php if($date_delivered != "0"){ ?>
+        <h5 class="c-order-deatils">Order Delivered Date : <span class="font-weight-bold"><?php echo $date_delivered; ?></span></h5>
+     <?php } ?>
       <?php if($cancel_status =="success"){ ?>
       <div class="alert alert-success">
         <strong>This order is successful !</strong>
