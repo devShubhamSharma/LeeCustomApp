@@ -15,17 +15,18 @@ class User
     public $con;
     function __construct()
     {
-       
         $dbobj = new DbConnect();
         $this->con = $dbobj->mkconnection();
+        print_r($this->con);
     }
 
     function insertdata($order_id, $description,$product_info,$quantity,$selected_date,$logos_name,$logo_file,$department,$site,$project_owner,$sample_file,$phone,$email,$terms)
     {
-        $q = "INSERT INTO
+        $q1 = "INSERT INTO
          productform (`order_id`, `description`, `product_info`, `quantity`, `selected_date`, `logos_name`, `logo_file`, `department`, `site`, `project_owner`, `sample_file`, `phone`, `email`, `terms`)
         VALUES ('$order_id', '$description','$product_info','$quantity','$selected_date','$logos_name','$logo_file','$department','$site','$project_owner','$sample_file','$phone','$email','$terms')";
-        if ($this->con->query($q)) {
+        $q2="INSERT INTO `statustable`(`order_id`) VALUES ('$order_id')";
+        if ($this->con->query($q1) && $this->con->query($q2)) {
             return true;
         } else {
             return false;
@@ -34,29 +35,35 @@ class User
 
     function sendemail($email,$message,$loc,$order_id){
         //$loc array to check attachment
-        $location="https://62e6-103-97-184-106.ngrok.io/images";
+        $location="https://store.cedcommmerce.com/images";
 		
 		$mail = new PHPMailer();
+        $mail->SetFrom('noreply@cedcommerce.com');
+        $mail->FromName = "Order Confirmation";
+        
+        $mail->addAddress($email);
+        // $mail->AddCC("bark@pawdega.com");
+        // $mail->addBCC("shubhamsharma@cedcommerce.com");
+        //$mail->isHTML(true);
+		//$mail->isSMTP();
 
-		$mail->isSMTP();
+		//$mail->Host = "smtp.gmail.com";
 
-		$mail->Host = "smtp.gmail.com";
+		//$mail->SMTPAuth = "true";
 
-		$mail->SMTPAuth = "true";
+		//$mail->SMTPSecure= "tls";
 
-		$mail->SMTPSecure= "tls";
+		//$mail->Port = "587";
 
-		$mail->Port = "587";
+		// $mail->Username = "yadavraunak449@gmail.com";
 
-		$mail->Username = "yadavraunak449@gmail.com";
-
-		$mail->Password = "Rahul@1998";
+		// $mail->Password = "Rahul@1998";
 
 		$mail->Subject = "Order Confirmation";
 
 		$mail->isHTML(true);
 
-		$mail->setFrom("yadavraunak449@gmail.com");
+		//$mail->setFrom("yadavraunak449@gmail.com");
         // $mail->setfrom('noreply@cedcommerce.com');
 
        
@@ -69,8 +76,9 @@ class User
 		$mail->Body = $message;
         
         
-		$mail->addAddress("sourcing@promote-u.com");
-        $mail->addcc($email);
+		//$mail->addAddress("sourcing@promote-u.com");
+        // $mail->addAddress($email);
+        //$mail->addcc($email);
 
 		if ($mail->Send()) {
 			
@@ -80,6 +88,38 @@ class User
 			echo "Mailer Error: " . $mail->ErrorInfo;
 		}
 
-		$mail->smtpClose();
+		//$mail->smtpClose();
+    }
+
+    function getOrderdetails($email){
+        $q="SELECT * FROM `productform` WHERE `email`='$email'";
+        $result=$this->con->query($q);
+        if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            $data[]=$row;
+        }
+        return $data;
+    } else {
+        return "0 results";
+    }
+
+    }
+
+    function getOrderStatus($orderId){
+        $q="SELECT *
+        FROM productform
+        LEFT JOIN statustable
+        ON productform.order_id = statustable.order_id
+        WHERE productform.order_id IN ('$orderId') ORDER BY statustable.order_id ";
+        $result=$this->con->query($q);
+        if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            $res[]=$row;
+        }
+            return $res;
+        }else{
+            return $this->con->error;
+        }
+
     }
 }

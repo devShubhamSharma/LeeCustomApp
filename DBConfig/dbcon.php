@@ -10,7 +10,7 @@
         $this->hostname="localhost";
         $this->username="root";
         $this->password="";
-        $this->dbname="leecustom";
+        $this->dbname="LeeCustomApp";
       }
 
       function mkconnection(){
@@ -18,7 +18,8 @@
           if($this->conn->error){
               echo "error in connection";
           }else{
-              return $this->conn;
+              print_r("connected");
           }
       }
+      
   }
