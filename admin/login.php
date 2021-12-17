@@ -3,6 +3,8 @@ session_start();
 if (isset($_POST['login'])) {
     $email = $_POST['email'];
     $pass = $_POST['password'];
+    print_r($email);
+    print_r($pass);die;
     $password=md5($pass);
     if($email=="catalentapprel@promote-u.com" && $pass=='Promote2021$'){
         $_SESSION['email'] = $email;
