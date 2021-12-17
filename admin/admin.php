@@ -1,7 +1,72 @@
 <?php
 include_once("../DBConfig/dbcon.php");
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+require_once('../vendor/autoload.php');
 class Admin{
     public $con,$result;
+
+    private function updateUser($email,$flag,$orderId){
+        $msg="";
+        $message="";
+        if($flag==1){
+            $msg="Your Order is approved by Admin";
+        }elseif($flag==2){
+            $msg="Your Order is In production";
+        }elseif($flag==3){
+            $msg="Your Order is processed from our end";
+        }elseif($flag==4){
+            $msg="Your Order is shipped";
+        }elseif($flag==5){
+            $msg="Your Order out for delivery";
+        }elseif($flag==6){
+            $msg="Your Order Delivered";
+        }elseif($flag==7){
+            $msg="Your Order is canceled by Admin";
+        }
+
+        $message=$msg." <br> For Order Id <b>".$orderId."</b><br>"."<b>Date: </b>".date("Y-m-d");
+        $mail = new PHPMailer();
+
+		$mail->isSMTP();
+
+		$mail->Host = "smtp.gmail.com";
+
+		$mail->SMTPAuth = "true";
+
+		$mail->SMTPSecure= "tls";
+
+		$mail->Port = "587";
+
+		$mail->Username = "stores@cedcommerce.com";
+
+		$mail->Password = "H%mX3F&M1";
+
+		$mail->Subject = "Order Status";
+
+		$mail->isHTML(true);
+
+		$mail->setfrom("stores@cedcommerce.com");
+        // $mail->setfrom('noreply@cedcommerce.com');
+
+		$mail->Body =$message;
+        
+		// $mail->addaddress("shubhamsharma@cedcommerce.com");
+        $mail->addAddress($email);
+        // $mail->addcc($email);
+
+		if ($mail->Send()) {
+			
+            echo "<h3>Mail Send To customer<h3>";
+		}
+		else{
+			echo "Mailer Error: " . $mail->ErrorInfo;
+		}
+
+		$mail->smtpClose();
+
+    }
     function __construct()
     {
        
@@ -10,7 +75,10 @@ class Admin{
     }
 
     function getAllRecord(){
-        $q="SELECT * FROM `productform`";
+        $q="SELECT *
+        FROM `productform`
+        INNER JOIN `statustable`
+        ON productform.order_id=statustable.order_id";
         $arr = []; 
         $result=$this->con->query($q);
         
@@ -18,21 +86,66 @@ class Admin{
 
         if ($result->num_rows > 0) {
             // output data of each row
-            $res="";
             $i=1;
-            while($row = $result->fetch_assoc()) {
-                $res.= "<tr><td>".$row["id"]."</td><td>".$row["email"]."</td><td>".$row["phone"]. "</td><td>". $row["order_id"]. "</td><td> " . $row["description"] .
-                 "<td><td>".$row["product_info"]."</td><td>".$row["quantity"]."</td><td>".$row["selected_date"]."</td>
-                 <td>".$row["logos_name"]."</td><td><a target='_blank' href='../images/".$row["logo_file"]."'>Get logo file</a></td>
-                 <td>".$row["department"]."</td><td>".$row["site"]."</td><td>".$row["project_owner"]."</td>
-                 <td><a target='_blank' href='../images/".$row["sample_file"]."'>Get logo file</a></td><td>".$row["order_date"]."</td><tr>";
-                 
-                 $data['data'][]=array($row["id"],$row["order_id"],$row["email"],$row["phone"],$row["description"],$row["product_info"],
+            $logofile;
+            $samplefile;
+            $status="Order Recieved";
+            while($row = $result->fetch_assoc()) {  
+                // Getting current Status
+                if($row['cancel_order']=='none'){
+                if(($row['order_approved']==1) && ($row['orderin_production']==0) && ($row['order_processed']==0) && ($row['order_shipped']==0)
+                && ($row['out_for_delivery']==0 && $row['delivered']==0)){
+                    $status="Order Approved";
+                }elseif(($row['order_approved']==1) && ($row['orderin_production']==1) && ($row['order_processed']==0) && ($row['order_shipped']==0)
+                && ($row['out_for_delivery']==0) && ($row['delivered']==0)){
+                    $status="Order In Production";
+                }elseif(($row['order_approved']==1) && ($row['orderin_production']==1) && ($row['order_processed']==1) && ($row['order_shipped']==0)
+                && ($row['out_for_delivery']==0 && $row['delivered']==0)){
+                    $status="Order Is Processed";
+                }elseif(($row['order_approved']==1) && ($row['orderin_production']==1) && ($row['order_processed']==1) && ($row['order_shipped']==1)
+                && ($row['out_for_delivery']==0 && $row['delivered']==0)){
+                    $status="Order Shipped";
+                }elseif(($row['order_approved']==1) && ($row['orderin_production']==1) && ($row['order_processed']==1) && ($row['order_shipped']==1)
+                && ($row['out_for_delivery']==1 && $row['delivered']==0)){
+                    $status="Out For delivery";
+                }elseif(($row['order_approved']==1) && ($row['orderin_production']==1) && ($row['order_processed']==1) && ($row['order_shipped']==1)
+                 && ($row['out_for_delivery']==1 && $row['delivered']==1)
+                ){
+                    $status="Delivered";
+                }
+            }else {
+                # code...
+                if($row['cancel_order']=='cancel'){
+                    $status="Canceled";
+                }else {
+                    $status="Completed";
+                }
+            }
+
+                //Checking whether file is uploaded or not
+                 if($row["logo_file"]=='') {
+                    $logofile="No file available";
+                 }else{
+                    $logofile="<a target='_blank' href='../images/".$row["logo_file"]."'>Get logo file</a>";
+                 }   
+                 if($row["sample_file"]=='') {
+                    $samplefile="No file available";
+                 }else{
+                    $samplefile="<a target='_blank' href='../images/".$row["sample_file"]."'>Get logo file</a>";
+                 }           
+                 $data['data'][]=array($i,$row["order_id"],$row["email"],$row["phone"],$row["description"],$row["product_info"],
                  $row["quantity"],$row["selected_date"],$row["logos_name"],
-                 "<a target='_blank' href='../images/".$row["logo_file"]."'>Get logo file</a>",
+                 $logofile,
                  $row["department"],$row["site"],$row["project_owner"],
-                 "<a target='_blank' href='../images/".$row["sample_file"]."'>Get logo file</a>",
-                 $row["order_date"],"<form method='post' action='updateorder.php'><input type='hidden' name='order_id' value=".$row["order_id"]."><button type='submit' class='btn btn-success' data-id=".$row["order_id"].">Update Status</button>" );
+                 $samplefile,
+                 $row["order_date"],$status,
+                 "<form method='post' action='viewdetails.php'><input type='hidden' name='order_id' value=".$row["order_id"]."><button type='submit' name='submit' class='btn btn-success' data-id=".$row["order_id"].">
+                 View Details
+                 </button>",
+                 "
+                 <form method='post' action='updateorder.php'><input type='hidden' name='order_id' value=".$row["order_id"]."><button type='submit' class='btn btn-success' data-id=".$row["order_id"].">
+                 Update Status
+                 </button>" );
                  $i++;
             }
             return $data;
@@ -60,17 +173,102 @@ class Admin{
 
     }
 
-    function updateOrder($orderId,$order_processed,$order_shipped,$out_for_delivey,$delivered){
+    function updateOrder($orderId,$order_approved,$orderin_production,$order_processed,$order_shipped,$out_for_delivey,$delivered,$email){
+        $satuts_order_approved;
+        $satuts_date_inproduction;
+        $satuts_order_processed;
+        $satuts_order_shipped;
+        $satuts_out_for_delivey;
+        $satuts_delivered;
+        $sql="SELECT * FROM `statustable` WHERE `order_id`='$orderId'";
+        $result=$this->con->query($sql);
+        if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            $satuts_order_approved=$row['order_approved'];
+            $satuts_date_inproduction=$row['date_inproduction'];
+            $satuts_order_processed=$row['order_processed'];
+            $satuts_order_shipped=$row['order_shipped'];
+            $satuts_out_for_delivey=$row['date_out_for_delivery'];
+            $satuts_delivered=$row['delivered'];
+        }
+        } else {
+            echo "0 results";
+        }
+        // die();
 
-        $q="UPDATE `statustable` SET
-        `order_packed`='$order_processed',`order_shipped`='$order_shipped',`out_for_delivery`='$out_for_delivey',
-        `delivered`='$delivered' WHERE `order_id`='$orderId'";
+        //current date
+        $date=date("Y-m-d");
+
+
+        if($order_approved==1 && $satuts_order_approved==0){
+            $q="UPDATE `statustable` SET
+            `order_approved`='$order_approved',`date_order_approval`='$date'
+            WHERE `order_id`='$orderId'";
+            $this->updateUser($email,1,$orderId);
+        }
+        if($orderin_production==1 && $satuts_date_inproduction==0){
+            $q="UPDATE `statustable` SET
+            `orderin_production`='$orderin_production',`date_inproduction`='$date'
+            WHERE `order_id`='$orderId'";
+            $this->updateUser($email,2,$orderId);
+
+        }
+        if($order_processed==1 && $satuts_order_processed==0){
+            $q="UPDATE `statustable` SET
+            `order_processed`='$order_processed',`date_order_proccessed`='$date'
+            WHERE `order_id`='$orderId'";
+            $this->updateUser($email,3,$orderId);
+
+        }
+        if($order_shipped==1 && $satuts_order_shipped==0){
+            $q="UPDATE `statustable` SET
+            `order_shipped`='$order_shipped',`date_shipped`='$date'
+            WHERE `order_id`='$orderId'";
+            $this->updateUser($email,4,$orderId);
+        }
+        if($out_for_delivey==1 && $satuts_out_for_delivey==0){
+            $q="UPDATE `statustable` SET
+            `out_for_delivery`='$out_for_delivey',`date_out_for_delivery`='$date'
+            WHERE `order_id`='$orderId'";
+            $this->updateUser($email,5,$orderId);
+        }
+        if($delivered==1 && $satuts_delivered==0){
+            $q="UPDATE `statustable` SET
+            `delivered`='$delivered',`date_delivered`='$date',`cancel_order`='success'
+             WHERE `order_id`='$orderId'";
+             $this->updateUser($email,6,$orderId);
+        }
 
         if ($this->con->query($q) === TRUE) {
             echo "Record updated successfully";
         } else {
-            echo "Error updating record: " . $con->error;
+            echo "Error updating record: " . $this->con->error;
         }
+    }
+
+    function getAlldetails($orderId){
+        $q="SELECT * FROM `productform` WHERE `order_id`='$orderId'";
+        $result=$this->con->query($q);
+        if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            $res[]=$row;
+        }
+        return $res;
+        } else {
+            echo "0 results";
+        }
+    }
+
+    function cancelorder($orderId,$email){
+        $q="UPDATE `statustable` SET
+            `cancel_order`='cancel' WHERE `order_id`='$orderId'";
+        if ($this->con->query($q) === TRUE) {
+            echo "Record Canceled successfully";
+            $this->updateUser($email,7,$orderId);
+        } else {
+            echo "Error updating record: " . $this->con->error;
+        }    
+
     }
 
 }

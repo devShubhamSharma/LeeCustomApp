@@ -1,3 +1,9 @@
+<?php
+session_start();
+if (!isset($_SESSION['email'])) {
+  header("Location: logout.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,25 +12,33 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Product Form</title>
-  <?php include('../cdn/data-cdn.php'); ?>
+  <?php include('../data-cdn.php'); ?>
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
-  
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/fixedcolumns/4.0.1/css/fixedColumns.dataTables.min.css">
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/fixedcolumns/4.0.1/js/dataTables.fixedColumns.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="../css/style.css">
 <style>
-    /* Ensure that the demo table scrolls */
     /* Ensure that the demo table scrolls */
     th, td { white-space: nowrap; }
     div.dataTables_wrapper {
-        width: 80%;
+        width: 100%;
         margin: 0 auto;
     }
+    
 </style>
 
 
 </head>
 <body>
-    <h1 class="text-center">Order Details</h1>
-    <div class="table-responsive">
+<?php require 'nav.php'; ?>
+<div class="container-fluid  c-full-height"> 
+  <div class="c-heading-border mb-4 mt-4">
+  <h2 class="c-heading-h2">Dashboard</h2>
+  </div>
+ <div class="container">
+</div>
+  <div class="table-responsive">
     <table id="table" class="stripe row-border order-column" style="width:100%">
         <thead>
         <tr>
@@ -43,25 +57,30 @@
             <th>Project Owner</th>
             <th>Sample File</th>
             <th>Order Date</th>
-            <th>Status</th>
+            <th>Current Status</th>
+            <th>View Details</th>
+            <th>Update Status</th>
         </tr>
      </thead>
      <tbody>
     </tbody>
     </table>
    </div>
+</div>
+
    
     <script>
         $(function(){
             // $("#load").click(function(){
                 $('#table').DataTable( {
-                    scrollY:        "300px",
+                    scrollY:        "500px",
                     scrollX:        true,
                     scrollCollapse: true,
-                    paging:         false,
+                    paging:         true,
                     fixedColumns:   true,
                     fixedColumns:   {
-                        left: 2
+                        left: 2,
+                        right: 3
                     },
                     stateSave: true,
                     bDestroy : true,
@@ -72,9 +91,13 @@
                         url: "medium.php",
                         dataSrc: "data"
                     }
+
+
                 } );
         
       });
+      
+
     </script>
 </body>
 </html>

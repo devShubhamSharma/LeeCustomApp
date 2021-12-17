@@ -10,10 +10,23 @@ if($_REQUEST['action']=='get'){
 
 if($_REQUEST['action']=='updateorder'){
    print_r($_REQUEST);
+   $email=$_REQUEST['email'];
+   $order_approved=$_REQUEST['order_approved'];
+   $orderin_production=$_REQUEST['orderin_production'];
    $orderId=$_REQUEST['orderId'];
    $order_processed =$_REQUEST['order_processed'];
    $order_shipped=$_REQUEST['order_shipped'];
    $out_for_delivey=$_REQUEST['out_for_delivey'];
    $delivered =$_REQUEST['delivered'];
-   $obj->updateOrder($orderId,$order_processed,$order_shipped,$out_for_delivey,$delivered);
+  $data= $obj->updateOrder($orderId,$order_approved,$orderin_production
+   ,$order_processed,$order_shipped,$out_for_delivey,$delivered,$email);
+   print_r($data);
+}
+
+if($_REQUEST['action']=='cancelorder'){
+    print_r($_REQUEST);
+    $orderId=$_REQUEST['order_id'];
+    $email=$_REQUEST['email'];
+    $obj->cancelorder($orderId,$email);
+
 }

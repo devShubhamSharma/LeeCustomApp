@@ -15,9 +15,9 @@ class User
     public $con;
     function __construct()
     {
+       
         $dbobj = new DbConnect();
         $this->con = $dbobj->mkconnection();
-        print_r($this->con);
     }
 
     function insertdata($order_id, $description,$product_info,$quantity,$selected_date,$logos_name,$logo_file,$department,$site,$project_owner,$sample_file,$phone,$email,$terms)
@@ -35,35 +35,29 @@ class User
 
     function sendemail($email,$message,$loc,$order_id){
         //$loc array to check attachment
-        $location="https://store.cedcommmerce.com/images";
+        $location="../images/";
 		
 		$mail = new PHPMailer();
-        $mail->SetFrom('noreply@cedcommerce.com');
-        $mail->FromName = "Order Confirmation";
-        
-        $mail->addAddress($email);
-        // $mail->AddCC("bark@pawdega.com");
-        // $mail->addBCC("shubhamsharma@cedcommerce.com");
-        //$mail->isHTML(true);
-		//$mail->isSMTP();
 
-		//$mail->Host = "smtp.gmail.com";
+		$mail->isSMTP();
 
-		//$mail->SMTPAuth = "true";
+		$mail->Host = "smtp.gmail.com";
 
-		//$mail->SMTPSecure= "tls";
+		$mail->SMTPAuth = "true";
 
-		//$mail->Port = "587";
+		$mail->SMTPSecure= "tls";
 
-		// $mail->Username = "yadavraunak449@gmail.com";
+		$mail->Port = "587";
 
-		// $mail->Password = "Rahul@1998";
+		$mail->Username = "stores@cedcommerce.com";
+
+		$mail->Password = "H%mX3F&M1";
 
 		$mail->Subject = "Order Confirmation";
 
 		$mail->isHTML(true);
 
-		//$mail->setFrom("yadavraunak449@gmail.com");
+		$mail->setfrom("stores@cedcommerce.com");
         // $mail->setfrom('noreply@cedcommerce.com');
 
        
@@ -75,10 +69,9 @@ class User
 
 		$mail->Body = $message;
         
-        
-		//$mail->addAddress("sourcing@promote-u.com");
-        // $mail->addAddress($email);
-        //$mail->addcc($email);
+		// $mail->addaddress("shubhamsharma@cedcommerce.com");
+        $mail->addAddress($email);
+        // $mail->addcc($email);
 
 		if ($mail->Send()) {
 			
@@ -88,7 +81,7 @@ class User
 			echo "Mailer Error: " . $mail->ErrorInfo;
 		}
 
-		//$mail->smtpClose();
+		$mail->smtpClose();
     }
 
     function getOrderdetails($email){
@@ -105,12 +98,17 @@ class User
 
     }
 
-    function getOrderStatus($orderId){
-        $q="SELECT *
-        FROM productform
-        LEFT JOIN statustable
-        ON productform.order_id = statustable.order_id
-        WHERE productform.order_id IN ('$orderId') ORDER BY statustable.order_id ";
+    function getOrderStatus($orderId,$email){
+        // $q="SELECT *
+        // FROM productform
+        // LEFT JOIN statustable
+        // ON productform.order_id = statustable.order_id
+        // WHERE productform.order_id IN ('$orderId') ORDER BY statustable.order_id ";
+         $q="SELECT *
+         FROM productform
+         LEFT JOIN statustable
+         ON productform.order_id = statustable.order_id
+         WHERE productform.order_id IN ('$orderId') AND productform.email IN ('$email') ORDER BY statustable.order_id ";
         $result=$this->con->query($q);
         if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
@@ -118,7 +116,7 @@ class User
         }
             return $res;
         }else{
-            return $this->con->error;
+            return '0 Results';
         }
 
     }

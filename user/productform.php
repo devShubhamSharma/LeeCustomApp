@@ -1,116 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php require 'header.php'; ?>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Product Form</title>
-  <?php include('../cdn/data-cdn.php'); ?>
-  <style>
-   .form-box * {
-      color: #5f7e86;
-    }
-    .logosFlex * {
-	color: #006dae !important;
-	font-size: 13px;
-}
-    .logo-text {
-	font-size: clamp(1rem, 4vw, 1.5rem);
-}
-.col-md-3 label {
-	font-weight: bold;
-}
-    .leeForm {
-    max-width: 90%;
-    margin: 2rem auto;
-    border: 1px solid;
-    }
-    .form-group {
-	margin-bottom: 15px;
-	grid-template-columns: 1fr 3fr;
-	border-top: 1px solid;
-	border-bottom: 1px solid;
-	align-items: center;
-}
-.form-group label {
-	padding: 10px;
-	margin: 0;
-}
+<div class="container-fluid" id="main">
+<div class="c-row-bg row row-offcanvas row-offcanvas-left">
+<?php require 'side-bar.php'; ?>
 
-.border_bottom{
-  border-bottom: 1px solid #000;
-}
-.form-box {
-	margin: 2rem .5rem;
-}
-.form-box p {
-	margin: 0;
-}
-/**  css start ***/ 
-.form-box-content {
-    border: 1px solid #000;
-}
-/* .right-border{
-  border-right: 1px solid #000;
-} */
-.form-group{
-
-  height: 100%;
-  border: 1px solid;
-  margin-bottom: 0;
-  padding: 2px 5px;
-  display: flex;
-flex-flow: column;
-align-items: flex-start;
-justify-content: center;
-}
-.form-control {
-	border-radius: 0;
-	border: 1px solid;
-}
-.btn-box{
-  justify-content: flex-end !important;
-align-content: end;
-flex-flow: unset!important;
-
-}
-.logosFlex {
-	display: flex;
-	flex-wrap: wrap;
-}
-.logosFlex > * {
-	flex: 1 1 15rem;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-}
-#logofile {
-	margin-top: 2rem;
-	padding-bottom: .6rem;
-}
-  </style>
-</head>
-
-<body>
+<div class="pt-4 col-md-9 col-lg-10 main">
+<div class="container-fluid mb-4">
+  <div class="c-row">
+  <a class="c-back-button" href="../index.php">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 330 330" style="enable-background:new 0 0 330 330;" xml:space="preserve">
+<path id="XMLID_6_" d="M165,0C74.019,0,0,74.019,0,165s74.019,165,165,165s165-74.019,165-165S255.981,0,165,0z M205.606,234.394
+	c5.858,5.857,5.858,15.355,0,21.213C202.678,258.535,198.839,260,195,260s-7.678-1.464-10.606-4.394l-80-79.998
+	c-2.813-2.813-4.394-6.628-4.394-10.606c0-3.978,1.58-7.794,4.394-10.607l80-80.002c5.857-5.858,15.355-5.858,21.213,0
+	c5.858,5.857,5.858,15.355,0,21.213l-69.393,69.396L205.606,234.394z"/>
+<g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g><g></g><g></g><g></g><g></g><g></g>
+</svg>
+Back to dashboard</a>
+</div>
+</div>
 <div class="form-box">
    <div class="row">
      <div class="container">
-       <div class="form-box-content">
+       <div class="">
         <div class="form-container-outer">
           <form id="Order_record" enctype="multipart/form-data">
           <!--------new row start -->
         <div class="row ">
           <div class="col-md-12 ">
-      
-            <div class="form-group ">
-              <p style="
-                padding: 10px;
-                font-weight: bold;
-                text-transform: uppercase;
-                letter-spacing: 1px;color: #111;
-              ">Custom Order</p>
+          <div class="card-header" id="headingOne">
+              <h5 class="mb-0">
+                <button class="c-card-heading btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Custom Order</button>
+              </h5>
             </div>
           </div>
       
@@ -138,7 +59,7 @@ flex-flow: unset!important;
           </div>
           <div class="col-md-9 pl-md-0">
             <div class="form-group " style="align-items: center; padding: 0;">
-        <a href="https://cdn.shopify.com/s/files/1/0061/3521/8249/files/Catalog_101721.pdf?v=1635183036" target="_blank" style="padding: 2rem 10px;font-weight: bold;">CLICK HERE FOR THE CATALENT CUSTOM ONLINE DIGITAL CATALOGUE</a>
+        <a href="https://promote-u.dcatalog.com/v/Promote-u-Catalog/" target="_blank" style="padding: 2rem 10px;font-weight: bold;">CLICK HERE FOR THE CATALENT CUSTOM ONLINE DIGITAL CATALOGUE</a>
         <div style="
         border-top: 1px solid;
         padding: 4px;
@@ -420,7 +341,7 @@ flex-flow: unset!important;
         <div class="row">
           <div class="col-md-12">
             <div class="form-group d-flex justify-content-end btn-box">
-            <button type="submit" id="save" class="btn btn-primary" style="color: #fff;">Submit Request</button>
+            <button type="submit" id="save" class="c-submit-btn c-form-button btn btn-primary" style="color: #fff;">Submit Request</button>
           </div>
           </div>
          
@@ -445,14 +366,14 @@ flex-flow: unset!important;
     <div class="modal-content">
 
       <!-- Modal Header -->
-      <div class="modal-header">
-        <h4 class="modal-title">Order Status & Details</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      <div class="modal-header card-header">
+        <h4 class="c-card-heading modal-title">Order Status & Details</h4>
+        <button type="text-white button" class="close" data-dismiss="modal">&times;</button>
       </div>
 
       <!-- Modal body -->
       <div class="modal-body">
-        <p id="result"></p>
+        <p id="result"  class="c-modal-message"></p>
       </div>
 
       <!-- Modal footer -->
@@ -463,8 +384,8 @@ flex-flow: unset!important;
     </div>
   </div>
 </div>
-</body>
 
+</div>
 <script>
 
 function convert(str) {
@@ -512,4 +433,5 @@ function convert(str) {
   
 </script>
 
-</html>
+<?php require 'footer.php'; ?>
+

@@ -21,5 +21,4 @@
               print_r("connected");
           }
       }
-      
   }
