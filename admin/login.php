@@ -5,7 +5,7 @@ if (isset($_POST['login'])) {
     $pass = $_POST['password'];
     $password=md5($pass);
     if($email=="catalentapprel@promote-u.com" && $pass=='Promote2021$'){
-        $_SESSION['email'] = $email;
+        $_SESSION['login_email'] = $email;
         $_SESSION['password'] = $pass;
         header("location: dashboard.php");
     }else{
