@@ -2,6 +2,7 @@
 include('user.php');
 $obj=new User();
 session_start();
+$_SESSION['error']='';
 if(isset($_POST)){
 if(isset($_POST['email'])){
     $_SESSION['email']=$_POST['email'];
@@ -60,7 +61,7 @@ Back to dashboard</a>
 </div>
 <div class="container">
     
-    <?php  if($result== '0 results'){?> <h4 class="text-center">No Order found using this Email Id</h4> <?php }?>
+    <?php  if($result== '0 results'){ $_SESSION['error']='No Order found using this Email Id';header("Location: ../index.php");?> <h4 class="text-center">No Order found using this Email Id</h4> <?php }?>
     <div class="table-responsive">
     <table id="table" class="stripe row-border order-column" style="width:100%">
         <thead>
@@ -78,6 +79,7 @@ Back to dashboard</a>
      <tbody>
          <?php 
          if($result!= '0 results'){
+            $_SESSION['error']='';
          for ($i = 0; $i < count($result); $i++) {
              ?><tr>
                  <td><?php echo $i+1; ?></td>

@@ -21,13 +21,13 @@ $delivered=$result[0]['delivered'];
 $cancel_status=$result[0]['cancel_order'];
 
 // Status date
-// $date_order_approved=$result[0]['order_approved'];
-// $date_orderin_production=$result[0]['orderin_production'];
-// $date_order_processed=$result[0]['order_processed'];
-// $date_order_shipped=$result[0]['order_shipped'];
-// $date_out_for_delivey=$result[0]['out_for_delivery'];
-// $date_delivered=$result[0]['delivered'];
-// $date_cancel_status=$result[0]['cancel_order'];
+$date_order_approved=$result[0]['date_order_approval'];
+$date_orderin_production=$result[0]['date_inproduction'];
+$date_order_processed=$result[0]['date_order_proccessed'];
+$date_order_shipped=$result[0]['date_shipped'];
+$date_out_for_delivey=$result[0]['date_out_for_delivery'];
+$date_delivered=$result[0]['date_delivered'];
+
 
 ?>
 <!DOCTYPE html>
@@ -75,8 +75,23 @@ $cancel_status=$result[0]['cancel_order'];
         <h2 class="c-heading-h2">Customer Details</h2>
       <h5 class="c-order-deatils">Order Id: <?php echo $_SESSION['order_id']; ?></h5>
       <h5 class="c-order-deatils">Email Id: <?php echo $result[0]['email']; ?></h5>
-      <?php if($result[0]['date_inproduction'] != "0"){ ?>
-        <h5 class="c-order-deatils">In Production Date : <span class="font-weight-bold"><?php echo $result[0]['date_inproduction']; ?></span></h5>
+      <?php if($date_order_approved != "0"){ ?>
+        <h5 class="c-order-deatils">Order Approval Date : <span class="font-weight-bold"><?php echo $date_order_approved; ?></span></h5>
+     <?php } ?>
+     <?php if($date_orderin_production != "0"){ ?>
+        <h5 class="c-order-deatils">In Production Date : <span class="font-weight-bold"><?php echo $date_orderin_production; ?></span></h5>
+     <?php } ?>
+     <?php if($date_order_processed != "0"){ ?>
+        <h5 class="c-order-deatils">Order Processed Date : <span class="font-weight-bold"><?php echo $date_order_processed; ?></span></h5>
+     <?php } ?>
+     <?php if($date_order_shipped != "0"){ ?>
+        <h5 class="c-order-deatils">Order Shipped Date : <span class="font-weight-bold"><?php echo $date_order_shipped; ?></span></h5>
+     <?php } ?>
+     <?php if($date_out_for_delivey != "0"){ ?>
+        <h5 class="c-order-deatils">Out for Delivery Date : <span class="font-weight-bold"><?php echo $date_out_for_delivey; ?></span></h5>
+     <?php } ?>
+     <?php if($date_delivered != "0"){ ?>
+        <h5 class="c-order-deatils">Order Delivered Date : <span class="font-weight-bold"><?php echo $date_delivered; ?></span></h5>
      <?php } ?>
       <hr>
       <h2 class="c-heading-h2">Update Order Status</h2>

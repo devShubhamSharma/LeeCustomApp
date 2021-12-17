@@ -1,3 +1,7 @@
+<?php
+  session_start();
+  $_SESSION['error']='';
+ ?>
 <?php require 'header.php'; ?>
 
 <div class="container-fluid" id="main">
