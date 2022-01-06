@@ -1,12 +1,19 @@
 <?php
 session_start();
+include("admin.php");
+
+$obj=new Admin();
+$adminarr=$obj->adminlogin();
+$adminemail=$adminarr[0]['email'];
+$password=$adminarr[0]['password'];
 if (isset($_POST['login'])) {
     $email = $_POST['email'];
     $pass = $_POST['password'];
-    $password=md5($pass);
-    if($email=="catalentapprel@promote-u.com" && $pass=='Promote2021$'){
-        $_SESSION['login_email'] = $email;
-        $_SESSION['password'] = $pass;
+    if($email==$adminemail && $pass==$password){
+        // $_SESSION['login_email'] = $email;
+        // $_SESSION['password'] = $pass;
+        echo $obj->login();
+        // die();
         header("location: dashboard.php");
     }else{
         echo "<script>alert('Invalid User Id or Pasword');</script>";
@@ -42,7 +49,7 @@ if (isset($_POST['login'])) {
     </div>
 
     <!-- Login Form -->
-    <form method="post">
+    <form  method="post">
       <input type="text" id="login" class="fadeIn second text mt-4" name="email" placeholder="email id">
       <input type="password" id="password" class="fadeIn third text mb-4" name="password" placeholder="password"><br>
       <input type="checkbox" id="showPassword" class="mr-2"/>Show password<br>

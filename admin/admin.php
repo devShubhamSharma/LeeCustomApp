@@ -271,4 +271,41 @@ class Admin{
 
     }
 
+    function adminlogin(){
+
+        $q="SELECT * FROM `login`";
+        $result=$this->con->query($q);
+        if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            $res[]=$row;
+        }
+        return $res;
+        } else {
+            echo "0 results";
+        }
+
+    }
+
+    function login(){
+
+        $q="UPDATE `login` SET `login_status`='1' WHERE `email`='catalentapprel@promote-u.com'";
+        if ($this->con->query($q) === TRUE) {
+            echo "LogIn successfully";
+        } else {
+            echo "Error in login: " . $this->con->error;
+        }    
+
+    }
+
+    function logout(){
+
+        $q="UPDATE `login` SET `login_status`='0' WHERE `email`='catalentapprel@promote-u.com'";
+        if ($this->con->query($q) === TRUE) {
+            echo "Logout successfully";
+        } else {
+            echo "Error updating Logout: " . $this->con->error;
+        }    
+
+    }
+
 }

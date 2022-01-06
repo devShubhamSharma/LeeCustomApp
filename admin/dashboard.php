@@ -1,6 +1,16 @@
 <?php
-session_start();
-if (!isset($_SESSION['login_email'])) {
+// session_start();
+// if (!isset($_SESSION['login_email'])) {
+//   header("Location: logout.php");
+// }
+include("admin.php");
+
+$obj=new Admin();
+$adminarr=$obj->adminlogin();
+$adminemail=$adminarr[0]['email'];
+$password=$adminarr[0]['password'];
+$login_status=$adminarr[0]['login_status'];
+if ($login_status==0) {
   header("Location: logout.php");
 }
 ?>

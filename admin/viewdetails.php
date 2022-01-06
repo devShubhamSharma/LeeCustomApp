@@ -3,14 +3,20 @@
     // echo  $_POST['order_id'];
 include('admin.php');
 session_start();
-if (!isset($_SESSION['login_email'])) {
+$obj=new Admin();
+// if (!isset($_SESSION['login_email'])) {
+//   header("Location: logout.php");
+// }
+$adminarr=$obj->adminlogin();
+$login_status=$adminarr[0]['login_status'];
+if ($login_status==0) {
   header("Location: logout.php");
 }
 if(isset($_POST['order_id'])){
     $_SESSION['order_id']=$_POST['order_id'];
 }
 
-$obj=new Admin();
+
 $result=$obj->getAlldetails($_SESSION['order_id']);
 // print_r($result);
 $logofile=$result[0]['logo_file'];

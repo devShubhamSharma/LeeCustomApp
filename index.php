@@ -9,14 +9,14 @@
   <h2 class="c-heading-h2">Dashboard</h2>
 </div>
 <div class="my-2">
-  <?php
+  <!-- <?php
     session_start();
     if(isset($_SESSION['error'])){
    if($_SESSION['error'] != ''){?>
     <div class="alert alert-danger" role="alert">
       <?php echo $_SESSION['error']; ?>
     </div>
-    <?php } } ?>
+    <?php } } ?> -->
    
 <div id="accordion">
   <div class="card">

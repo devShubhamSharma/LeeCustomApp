@@ -61,7 +61,11 @@ Back to dashboard</a>
 </div>
 <div class="container">
     
-    <?php  if($result== '0 results'){ $_SESSION['error']='No Order found using this Email Id';header("Location: ../index.php");?> <h4 class="text-center">No Order found using this Email Id</h4> <?php }?>
+    <?php  if($result== '0 results'){
+        //  $_SESSION['error']='No Order found using this Email Id';
+        //  header("Location: ../index.php");
+         ?> 
+         <div class="my-4 alert-danger" role="alert"><h4 class="text-center">No Order found using this Email Id</h4></div> <?php }?>
     <div class="table-responsive">
     <table id="table" class="stripe row-border order-column" style="width:100%">
         <thead>

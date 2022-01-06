@@ -114,18 +114,19 @@ Back&nbsp;to&nbsp;
       <?php } ?>
       <?php }?>
     </div>
-    <?php If($result == '0 Results'){
-         $_SESSION['error']='No Order Found Using this Order Id and Email  id';
-         header("Location: ../index.php");
+    <?php
+     If($result == '0 Results'){
+    //      $_SESSION['error']='No Order Found Using this Order Id and Email  id';
+    //      header("Location: ../index.php");
         ?>
-        <div class="container">
-         <h1>No Order Found Using this Id</h1>
-        </div>
+     
+        <div class="my-4 alert-danger" role="alert"><h1>No Order Found Using this Id</h1></div>
+       
         <?php
     }
     ?>
    <?php If($result != '0 Results'){
-       $_SESSION['error']='';
+    //    $_SESSION['error']='';
        ?>
     <div class="container-fluid">
     <h1 class="c-heading-h2 mt-3">Current Status</h1>

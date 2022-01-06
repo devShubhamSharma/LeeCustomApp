@@ -1,8 +1,11 @@
 <?php
-  session_start();
+  // session_start();
 
-
+  include("admin.php");
+  $obj=new Admin();
   echo "Logout Successfully ";
-  session_destroy();   // function that Destroys Session 
+
+  echo $obj->logout();
+  // session_destroy();   // function that Destroys Session 
   header("Location: login.php");
 ?>

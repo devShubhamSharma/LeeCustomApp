@@ -3,7 +3,12 @@
 include('admin.php');
 $obj=new Admin();
 session_start();
-if (!isset($_SESSION['login_email'])) {
+// if (!isset($_SESSION['login_email'])) {
+//   header("Location: logout.php");
+// }
+$adminarr=$obj->adminlogin();
+$login_status=$adminarr[0]['login_status'];
+if ($login_status==0) {
   header("Location: logout.php");
 }
 if(isset($_POST['order_id'])){
