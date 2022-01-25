@@ -1,0 +1,2 @@
+ProxyPassReverseCookieDomain .cedcommerce.com catalentstore.com
+ProxyPreserveHost On
